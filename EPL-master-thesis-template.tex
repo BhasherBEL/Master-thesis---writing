@@ -1,0 +1,45 @@
+% EPL master thesis covers template
+\documentclass{cover/EPL-master-thesis-covers-EN}
+
+\usepackage{subfiles}
+
+\title{Smart visitor guidance for the Musée L}
+
+%\subtitle{Optional subtitle}
+
+\author{Brieuc \textsc{Dubois}}
+
+\degreetitle{Master [120] in Computer Science}
+
+\supervisor{Cristel \textsc{Pelsser}}
+\secondsupervisor{Ramin \textsc{Sadre}}		% remove if not applicable
+%\thirdsupervisor{Firstname \textsc{Lastname}}		% remove if not applicable
+
+% Name of the reader(s)
+%\readerone{Firstname \textsc{Lastname}}
+%\readertwo{Firstname \textsc{Lastname}}			% remove if not applicable
+%\readerthree{Firstname \textsc{Lastname}}			% remove if not applicable
+%\readerfour{Firstname \textsc{Lastname}}			% remove if not applicable
+%\readerfive{Firstname \textsc{Lastname}}			% remove if not applicable
+
+\years{2024--2025}
+
+% Document
+\begin{document}
+  % Front cover page
+  \maketitle
+
+  \subfile{content/preface/abstract}
+  \subfile{content/preface/acknowledgments}
+  \subfile{content/preface/toc}
+  
+  \subfile{content/introduction}
+  \subfile{content/background}
+
+  \bibliographystyle{plain}
+  \bibliography{references}
+
+  % Back cover page
+  \backcoverpage
+
+\end{document}
