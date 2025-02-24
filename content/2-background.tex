@@ -1,75 +1,63 @@
 \chapter{Background}
+\label{chap:background}
 
-\section{Technologies}
+Indoor localization encompass a wide range of technologies designed for tracking and positioning within indoor environments. This chapter provides an overview of key technologies, distinguishing between active and passive systems based on whether the user needs to carry a device. Various methods such as GPS, QR codes, RFID, NFC, infrared, ultrasound, ultra-wideband, Wi-Fi, Bluetooth, and hybrid approaches are examined in terms of their accuracy, infrastructure requirements, and feasibility. This background lays the foundation for selecting the most suitable approach for specific indoor environments.
 
-% Variety of terms:
-% - Indoor Location-Based Service (ILBS)
-% - Indoor localisation
-% - Indoor positioning
-% - Indroor Positioning Systems (IPS)
+\section{Satellite navigation}
 
-% Indoor localization is divided into active and passive systems. In active positioning, the user needs to carry a mobile device that will actively search and collect signals. In passive positioning, the user doesn't need to carry any device. In such systems, the user is detected based on his effects on the propagation of the signal \cite{liu_survey_2020}. 
+Satellite navigation systems, such as GPS, GLONASS, Galileo, and BeiDou, are the standard for global positioning and are widely integrated into smartphones, wearables, vehicles, and other devices. Recent advancements, including improved satellite constellations and correction techniques like SBAS (Satellite-Based Augmentation Systems), have significantly enhanced positioning accuracy, with some systems achieving precision within a few meters. However, these technologies still face major limitations in indoor environments due to signal degradation caused by multi-path interference, obstructions, and the lack of a direct line of sight to satellites, making them unreliable for accurate indoor localization \cite{mainetti_survey_2014}. 
 
-\subsection{Global Positioning System}
+\section{QR code}
 
-The Global Positioning System (GPS) is the de-facto standard for most positioning systems. It is largely deployed, available worldwide, and embedded in almost all smartphones, watches, cars, etc. But while it can provide a sufficient precision for most outdoor usages, with a precision of around 20m, it is inefficient for indoor localization because of errors by multi-path, Non-Line-of-Sight with the sky \cite{mainetti_survey_2014} and insufficient precision.
+QR codes are a widely used method for providing information to visitors. However, as a passive technology, they require users to actively scan the code to access content, which may limit engagement and effectiveness, especially for the majority of visitors who may not take this extra step \cite{spachos_ble_2020}. 
 
-% !! TODO: Develop efforts to make it works inside/with a greater precision.
-
-\subsection{QR code}
-
-QR codes are a popular way to provide information to a visitor. However, this passive approach require the visitors to take action in order to get further information, which is not helpful for the majority of the visitors \cite{spachos_ble_2020}. 
-
-\subsection{RFID}
+\section{RFID}
 
 RFID is a widely deployed technology, used by most of the contactless tokens. In the context of indoor localization, it would require a large number of inexpensive tags. It also works without direct LoS \cite{mainetti_survey_2014}. It's a nice alternative to QR-code, and allow a bit more interaction. However, it is also a passive method, that as the same issues than discussed before. It short range make it also more efficient to determine if a user is near the tag rather than having a precise indoor localization \cite{shang_overview_2022}. 
 
-\subsection{NFC}
+\section{NFC}
 
-NFC is a widely deployed technology, available in almost any smartphone nowadays. But as RFID tags, it's communication area is very limited and require a lot of beacons to provide indoor localization. However, it can achieve a very high precision without needing the visitor to carry any special device \cite{cai_museum_2015}. It can be seen as an active alternative to RFID.
+NFC is a widely deployed technology, integrated into most modern smartphones. Like RFID, it has a very limited communication range and requires a dense network of beacons for indoor localization. However, NFC offers high precision and does not require visitors to carry any additional devices, making it a more interactive and user-friendly alternative to RFID \cite{cai_museum_2015}. 
 
-%\subsection{Vision}
+\section{Vision}
 
-%Evaluating video data on real time is time, cost, power and resource intensive.
+Vision-based systems use cameras and image processing algorithms to detect and track objects or individuals within an environment. These systems can achieve high accuracy and provide rich contextual information, making them useful for applications like facial recognition, object identification, and augmented reality. However, they require significant computational resources, are affected by lighting conditions and occlusions, and raise privacy concerns in public spaces. Despite these challenges, advances in machine learning and computer vision continue to improve their reliability and applicability in various domains \cite{mainetti_survey_2014}. 
 
-\subsection{Infrared}
+\section{Infrared}
 
-Infrared requires a Line of Sight (LoS), does not penetrate through walls, have multi-path errors and require expensive hardware \cite{mainetti_survey_2014}. It has huge requirements on the target environment and is influenced by heat sources and lights \cite{shang_overview_2022}.
+Infrared-based indoor localization requires a direct Line of Sight (LoS) and is unable to penetrate walls, making it susceptible to occlusions and multi-path errors \cite{mainetti_survey_2014}. Additionally, it is highly sensitive to environmental factors such as heat sources and ambient lighting, which can interfere with signal accuracy \cite{shang_overview_2022}. Furthermore, the implementation of infrared systems often demands specialized and expensive hardware, limiting their practicality for large-scale deployments.
 
-\subsection{Ultrasound}
+\section{Ultrasound}
 
 Ultrasound is complex to set up in a large scale, is prone to multi-path errors and is highly sensitive to ambient temperature \cite{mainetti_survey_2014}. It uses the technique of the Time Of Flight and can have an accuracy up to the centimeters, but the real efficiency can be affected by the humidity, the ambient temperature, the air density and the obstacles. It also require a tight synchronization between the devices \cite{shang_overview_2022} \cite{mainetti_survey_2014}.
 
-\subsection{Ultra Wide Band}
+\section{Ultra Wide Band}
 
 Ultra wide band can provide a very accurate localization, based on the Time-Of-Arrival techniques. It's also power efficient, has a fine resolution and is robust in harsh environments. However, it requires a lot of extra hardware devices \cite{spachos_ble_2020} and is expensive \cite{shang_overview_2022}.
 
-\subsection{Wi-Fi}
+\section{Wi-Fi}
 
-The Wi-Fi is one of the most used systems for indoor localization, as it's the most widely deployed indoor infrastructure and thus can partially rely on existing infrastructure. It's also cost effective \cite{mainetti_survey_2014} and do not require extensive knowledge for users or maintainers \cite{shang_overview_2022}. The users don't have to carry any special device, except their own smartphone. However, the devices are heterogeneous and may differ widely from the reference device(s) used for initial setup \cite{liu_survey_2020}. It doesn't require a direct LoS \cite{mainetti_survey_2014}, even if the environment may have a huge impact on the precision, range and multi-path effect \cite{liu_survey_2020}. Most used techniques are Cell of Origin method, triangulation and RSS-based fingerprinting. It can achieve a theoretical precision of a few centimeters in a dense, errorless and open environment but usually achieve a precision of a few meters for more realistic ones \cite{liu_survey_2020}. More specifically, RSSI is the current mainstream system but is prone to noise and interfaces in a dense area \cite{spachos_ble_2020}. The precision can be adjusted based on the density \cite{shang_overview_2022}. It offer a proper balance between efforts and accuracy \cite{ali_locali_2017}. There is two main methods:
- RSSI heat maps, that allow to visually describe the infrastructure, detects it's weaknesses and use simpler algorithms than most others \cite{ali_locali_2017} and RSSI fingerprinting, that compare user values to a database of registred reference values. 
+The Wi-Fi is one of the most used systems for indoor localization, as it's the most widely deployed indoor infrastructure and thus can partially rely on existing infrastructure. It's also cost effective \cite{mainetti_survey_2014} and do not require extensive knowledge for users or maintainers \cite{shang_overview_2022}. The users don't have to carry any special device, except their own smartphone.
 
-\subsection{Bluetooth}
+However, the devices are heterogeneous and may differ widely from the reference device(s) used for initial setup \cite{liu_survey_2020}. It doesn't require a direct LoS \cite{mainetti_survey_2014}, even if the environment may have a huge impact on the precision, range and multi-path effect \cite{liu_survey_2020}. Most used techniques are Cell of Origin method, triangulation and RSS-based fingerprinting. It can achieve a theoretical precision of a few centimeters in a dense, errorless and open environment but usually achieve a precision of a few meters for more realistic ones \cite{liu_survey_2020}.
 
-Bluetooth is as deployed as Wi-Fi, and even more in mobile devices such as smartphone, watches, headphones, etc. There is an enormous amount of Bluetooth beacons available on the market, for very cheap \cite{spachos_ble_2020} and they are easier to modulate to reduce or extend their range. Typical user devices have a range of 10 to 15 meters \cite{mainetti_survey_2014}. In real case scenarios, it provides an accuracy close to Wi-Fi, from 2m to 3m \cite{mainetti_survey_2014} \cite{spachos_ble_2020}. Bluetooth also require less power than Wi-Fi, because it runs in a special \textit{low power} mode. Bluetooth Low Energy (BLE) also provides more privacy, because their beacons only send a signal, and are not listening \cite{spachos_ble_2020}. The receiver has to handle the data, and can do all the work locally. Signals can be send every 20ms - 10s depending on the usage, and have a huge impact on battery life of the beacons \cite{spachos_ble_2020}, especially if they run on battery. While battery is often used because of the ease of deployment and that a beacon can work for months with just a coin cell, the infrastructure could be more error-prone and the maintenance burden would still be high \cite{spachos_ble_2020}. The precision depends on the distance between the Beacon and the receiver. While the literature is uncertain about the optimal density of beacons, it's accepted that it has a huge impact on the accuracy and require environment-specific tests \cite{spachos_ble_2020} \cite{shang_overview_2022}. BLE beacons can reach up to 60 meters, but it has a huge impact on the power consumption. For those reasons, a transmission range of 2-5m is usually considered \cite{spachos_ble_2020}. But it could have an impact on indoor localization while not exactly in front of art pieces. Bluetooth don't interfere with other wireless infrastructures that may already be present in the area such as Wi-Fi, GPS or FM. However, they can interfere with other Bluetooth devices \cite{spachos_ble_2020}  and maybe even more in a digital museum, as they could be used to listen to audio. In a perfect environment, the theoretical RSSI with BLE is defined by equation \ref{eq:BLE_RSSI} where $A$ is the received signal strength at 1m, $n$ the signal propagation constant, depending mainly on the environment and $d$ the distance. As we can see, the RSSI is logarithmically dependent of the distance and explain why the precision decrease with the distance \cite{spachos_ble_2020}.
+More specifically, RSSI is the current mainstream system but is prone to noise and interfaces in a dense area \cite{spachos_ble_2020}. The precision can be adjusted based on the density \cite{shang_overview_2022}. It offer a proper balance between efforts and accuracy \cite{ali_locali_2017}. There is two main methods:
+ RSSI heat maps, that allow to visually describe the infrastructure, detects it's weaknesses and use simpler algorithms than most others \cite{ali_locali_2017} and RSSI fingerprinting, that compare user values to a database of registered reference values. 
+
+\section{Bluetooth}
+
+Bluetooth is as widely deployed as Wi-Fi and is even more prevalent in mobile devices such as smartphones, smartwatches, and wireless headphones. A large number of Bluetooth beacons are available on the market at a low cost \cite{spachos_ble_2020}, and their transmission range can be easily adjusted. Typical user devices have a range of 10 to 15 meters \cite{mainetti_survey_2014}. In real-world scenarios, Bluetooth positioning provides accuracy close to that of Wi-Fi, typically ranging from 2 to 3 meters \cite{mainetti_survey_2014} \cite{spachos_ble_2020}.   
+
+One key advantage of Bluetooth is its lower power consumption compared to Wi-Fi, thanks to its low power  operating mode. Bluetooth Low Energy (BLE) further improves efficiency and privacy, as its beacons only transmit signals without listening \cite{spachos_ble_2020}. The receiving device can processes the data locally, reducing network dependency. The transmission frequency of BLE signals varies from every 20 milliseconds to 10 seconds, which significantly impacts battery life \cite{spachos_ble_2020}. While battery-powered beacons are easy to deploy and can function for months using a coin cell, they are also more prone to failures, increasing the maintenance burden \cite{spachos_ble_2020}.   
+
+The accuracy of BLE localization depends on beacon density and placement. While the optimal density remains uncertain, research agrees that higher beacon density improves positioning accuracy and requires environment-specific testing \cite{spachos_ble_2020} \cite{shang_overview_2022}. BLE beacons can reach distances of up to 60 meters, but this significantly increases power consumption. A typical transmission range of 2 to 5 meters is often preferred \cite{spachos_ble_2020}, though this may impact localization accuracy when users are not directly in front of reference points, such as artworks in museums.   
+
+Bluetooth does not interfere with wireless technologies like Wi-Fi, GPS, or FM signals. However, it may suffer from interference with other Bluetooth devices \cite{spachos_ble_2020}, which could be particularly problematic in environments like digital museums where visitors may be using Bluetooth for audio guides. In optimal conditions, the theoretical Received Signal Strength Indicator (RSSI) for BLE follows the equation \ref{eq:BLE_RSSI}, where the received signal strength depends logarithmically on distance. This relationship explains why accuracy decreases as the distance between the beacon and receiver increases \cite{spachos_ble_2020}. 
 
 \begin{equation} \label{eq:BLE_RSSI}
     RSSI = A - 10n \cdot \log_{10}d
 \end{equation}
 
-\subsection{Hybrid}
+\section{Hybrid}
 
-More and more systems combine more than one method to get the best possible accuracy \cite{shang_overview_2022}. Various device sensors can also be used to improve the real-time precision between the emission of the beacons such as inertial senors, accelerometers, gyroscopes, etc \cite{ali_locali_2017}. 
-
-\subsection{Summary}
-
-Espresence
-
-\section{Market products}
-
-\begin{itemize}
-    \item Mapsted. 3-5m accuracy.
-    \item Steerpath (used by Aalto). 2-5m accuracy.
-\end{itemize}
-
-\subsection{Google Indoor Map}
+More and more systems combine multiple methods to achieve the best possible accuracy \cite{shang_overview_2022}. Various device sensors, such as inertial sensors, accelerometers, and gyroscopes, can also be used to improve real-time precision between beacon emissions \cite{ali_locali_2017}. However, the availability of these technologies may be heterogeneous, depending on the devices and environments, which can introduce additional complexity and increase the maintenance burden for the infrastructure.
