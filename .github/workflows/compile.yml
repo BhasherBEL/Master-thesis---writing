@@ -1,0 +1,16 @@
+on:
+  - push
+
+jobs:
+  latex-compile:
+    runs-on: ubuntu-latest
+    name: A job to Compile Latex file
+    steps:
+    - uses: actions/checkout@v1
+    - name: Compilation
+      uses: vinay0410/tectonic-action@master
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tex_path: 'EPL-master-thesis-template.tex'
+        push: 'yes'
