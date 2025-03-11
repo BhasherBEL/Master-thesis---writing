@@ -1,7 +1,7 @@
 \chapter{Background}
 \label{chap:background}
 
-Indoor localization encompass a wide range of technologies designed for tracking and positioning within indoor environments. This chapter provides an overview of key technologies, distinguishing between active and passive systems based on whether the user needs to carry a device. Various methods such as GPS, QR codes, RFID, NFC, infrared, ultrasound, ultra-wideband, Wi-Fi, Bluetooth, and hybrid approaches are examined in terms of their accuracy, infrastructure requirements, and feasibility. This background lays the foundation for selecting the most suitable approach for specific indoor environments.
+Indoor localization encompass a wide range of technologies designed for tracking and positioning within indoor environments. This chapter provides an overview of key technologies, comparing them based on multiple factors, including whether the user needs to carry a device, accuracy, sustainability, cost, and infrastructure requirements. Various methods such as GPS, QR codes, RFID, NFC, infrared, ultrasound, ultra-wide band, Wi-Fi, Bluetooth, and hybrid approaches are examined in terms of their feasibility and trade-offs. A summary table at the end of the chapter will provide a comparative overview to facilitate the selection of the most suitable approach for specific indoor environments.
 
 \section{Satellite navigation}
 
@@ -61,3 +61,34 @@ Bluetooth does not interfere with wireless technologies like Wi-Fi, GPS, or FM s
 \section{Hybrid}
 
 More and more systems combine multiple methods to achieve the best possible accuracy \cite{shang_overview_2022}. Various device sensors, such as inertial sensors, accelerometers, and gyroscopes, can also be used to improve real-time precision between beacon emissions \cite{ali_locali_2017}. However, the availability of these technologies may be heterogeneous, depending on the devices and environments, which can introduce additional complexity and increase the maintenance burden for the infrastructure.
+
+\section{Summary}
+
+The table \ref{tab:comparison} summarizes the various technologies discussed in the literature, highlighting the best values for each criterion. For indoor localization within a museum using smartphones, we prioritized the use of users' smartphones over specialized devices, favored passive technologies over active ones, sought an accuracy of around one meter, and targeted a coverage of at least 20 meters for each device.  
+
+While no single technology meets all these requirements, some stand out more than others. Satellite navigation fulfills most requirements, explaining its widespread use; however, it suffers from poor accuracy indoors and is primarily designed for outdoor positioning. QR codes, RFID, and NFC are also widely available, but they necessitate user involvement and a high density of tags. Infrared, ultrasound, and ultra-wideband technologies perform well but require specialized devices and beacons, leading to higher costs. Vision-based systems are intriguing but demand substantial infrastructure to capture and analyze data in real time, which also raises privacy concerns.  
+
+Finally, both Wi-Fi and Bluetooth are widely accessible and do not require active user participation, but their accuracy typically ranges from 3 to 5 meters. This level of precision may suffice in a museum context when accompanied by adequate post-processing to enhance accuracy. Ultimately, Bluetooth was selected due to the low cost of its beacons, power efficiency, and the fact that BLE bands are less congested than Wi-Fi's. 
+
+\begin{table}[h]
+    \centering
+    \label{tab:comparison}
+    \begin{tabular}{|l|c|c|c|c|c|}
+        \hline
+        \textbf{Technology} & \textbf{Device} & \textbf{Involvement} & \textbf{Accuracy} & \textbf{Cost} & \textbf{Coverage} \\
+        \hline
+        Satellite Navigation & \textbf{Smartphone}   & \textbf{Passive} & > 20m  & \textbf{Low}  & \textbf{Worldwide} \\
+        QR Code              & \textbf{Smartphone}   & Active  & \textbf{< 1m}   & \textbf{Low}  & \textasciitilde 1m \\
+        RFID                 & \textbf{Smartphone}   & Active  & \textbf{< 1m}   & \textbf{Low}  & < 0.1m \\
+        NFC                  & \textbf{Smartphone}   & Active  & \textbf{< 1m}   & \textbf{Low}  & < 0.05m \\
+        Vision               & \textbf{No}           & \textbf{Passive} & \textbf{< 1m}   & High & \textasciitilde 10m \\
+        Infrared             & Specialized  & \textbf{Passive} & < 5m   & High & \textasciitilde 5m \\
+        Ultrasound           & Specialized  & \textbf{Passive} & \textbf{< 1m}   & High & \textasciitilde 10m \\
+        Ultra Wide Band      & Specialized  & \textbf{Passive} & \textbf{< 0.5m} & High & \textbf{\textasciitilde 30m} \\
+        Wi-Fi                & \textbf{Smartphone}   & \textbf{Passive} & < 5m   & \textbf{Low}  & \textbf{\textasciitilde 30m} \\
+        Bluetooth            & \textbf{Smartphone}   & \textbf{Passive} & < 3m   & \textbf{Low}  & \textbf{\textasciitilde 30m} \\
+        Hybrid               & Varies       & Varies  & Varies & High & Varies \\
+        \hline
+    \end{tabular}
+    \caption{Comparison of Indoor Localization Technologies}
+\end{table}
