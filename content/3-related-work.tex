@@ -1,4 +1,22 @@
 \chapter{Related works}
 \label{chap:related-work}
 
-This research will use BLE beacons for indoor localization.
+\section{Application in museums}
+
+Bluetooth Low Energy (BLE) has been extensively studied in relation to the unique layouts of museums. For instance, \cite{barsocchi_detecting_2021} utilizes BLE beacons as proximity sensors, while \cite{verde_indoor_2023} focuses on determining a visitor's location within a specific room rather than identifying individual art pieces, enabling the delivery of relevant content in a broader context. 
+
+In the realm of indoor localization, \cite{spachos_ble_2020} employed Kalman filtering to enhance distance estimation, achieving an error of less than 3.5 meters for 95\% of readings with raw data, and 3 meters with filtered data. This indicates that filtering uncertainties in raw data can significantly reduce average errors. The study found that when the receiver is within 50 centimeters of a beacon, the accuracy of the system is notably high, suggesting that positioning beacons close to Points of Interest (POIs) can enhance overall performance. Conversely, it is also noted that if beacons are spaced less than one meter apart, the accuracy may decrease.
+
+\section{Privacy and ethical considerations}
+
+While many solutions, including those examined by \cite{alletto_indoor_2016} and \cite{spachos_ble_2020}, rely on external processing centers, recent research indicates that privacy-first solutions are feasible. These approaches involve conducting all necessary computations on the user's device, allowing the application to utilize smartphone capabilities without exposing sensitive personal information to external systems.
+
+\section{Sustainability and energy efficiency}
+
+Sustainability is crucial for museums as they aim to minimize their environmental impact and meet the expectations of eco-conscious visitors. By adopting sustainable practices, museums enhance their reputation and contribute positively to their communities. This commitment extends to the technologies they employ, including IT-enhanced solutions like indoor localization. 
+
+Integrating technologies such as Bluetooth Low Energy (BLE) beacons aligns well with sustainability goals. BLE beacons are known for their energy efficiency, often functioning for months or years on a single battery or even designed to operate using solar cells \cite{spachos_ble_2020}, which reduces electronic waste and lowers the carbon footprint.
+
+\section{User Experience and Engagement}
+
+To the best of our knowledge, most studies on localization-enhanced experiences primarily focus on technical outcomes, with few efforts made to concretely enhance the user experience. Moreover, there is a notable absence of feedback from visitors in existing research. While some studies have attempted to personalize user experiences through localization technologies, such as the work by \cite{alletto_indoor_2016}, which involves a simple questionnaire to tailor visits, these limited investigations fail to adequately address user perception and engagement.
