@@ -1,92 +1,54 @@
-\chapter{Methodology, Implementation and Experimental Results}
-\label{chap:implementation}
-
-The first experiment focus on the beacons data directly. It aims to calibrate the meta-parameters and analyzes the precision of the distance estimation between the phone and the beacons. The experiment take place in a corridor, with no obstacle and a direct Line of Sight (LoS) between the phone and the sensors. The sensor is placed at 1.5 meters from the ground and measurements are taken at every meter, starting at "0" ($L_0$), with the phone touching the sensor, and up to 15 meters away from it ($L_{15}$). At each step, the phone take measurements for 20 seconds. Each sensor is tested with no other sensor active at the same time.
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[scale=0.6]
-        % Room dimensions 
-        \draw[thick] (0,0) rectangle (17,2);  
-        % Grid (optional, for reference)
-        \draw[gray!30, step=1] (0,0) grid (17, 2);
-        
-        % ESP32 devices (blue dots)
-        \filldraw[blue] (1, 1) circle (0.2) node[below] {Beacon};
-
-        % User positions (X marks)
-        \filldraw (1.1, 1) circle (0.1) node[above] {$L_0$};
-        \filldraw (2, 1) circle (0.1) node[above] {$L_1$};
-        \filldraw (3, 1) circle (0.1) node[above] {$L_2$};
-        \filldraw (4, 1) circle (0.1) node[above] {$L_3$};
-        \filldraw (5, 1) circle (0.1) node[above] {$L_4$};
-        \filldraw (6, 1) circle (0.1) node[above] {$L_5$};
-        \filldraw (7, 1) circle (0.1) node[above] {$L_6$};
-        \filldraw (8, 1) circle (0.1) node[above] {$L_7$};
-        \filldraw (9, 1) circle (0.1) node[above] {$L_8$};
-        \filldraw (10, 1) circle (0.1) node[above] {$L_9$};
-        \filldraw (11, 1) circle (0.1) node[above] {$L_{10}$};
-        \filldraw (12, 1) circle (0.1) node[above] {$L_{11}$};
-        \filldraw (13, 1) circle (0.1) node[above] {$L_{12}$};
-        \filldraw (14, 1) circle (0.1) node[above] {$L_{13}$};
-        \filldraw (15, 1) circle (0.1) node[above] {$L_{14}$};
-        \filldraw (16, 1) circle (0.1) node[above] {$L_{15}$};
-        
-        % Scale indicator
-        \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
-    \end{tikzpicture}
-    \caption{Experimental setup for the first experiment showing three ESP32 devices and a single POI with its detection radius.}
-    \label{fig:exp1_setup}
-\end{figure}
+\chapter{Experimental Results}
+\label{chap:results}
 
 \section{Calibration}
+The distance estimation from the Received Signal Strength Indicator (RSSI) is computed using \autoref{eq:BLE_RSSI}, which includes two meta-parameters. The first parameter, $tx_{power}$, represents the RSSI at a distance of one meter. The second parameter, the environmental factor ($N$), accounts for signal propagation characteristics that depend on the surroundings.
 
-The \autoref{eq:BLE_RSSI} to derive the distance from the Received Signal Strength Indicator (RSSI) has two meta parameters. The first one is the $tx_{power}$, which is equivalent to the RSSI at one meter. The second is the environmental factor ($N$) and depends of the layout of the surrounding environment. 
+\subsection{RSSI at One Meter ($tx_{power}$)}
+Results from the first experiment in \autoref{exp:1_accuracy} are displayed in \autoref{fig:beacon-rssi-1m}. These results indicate that although the RSSI distribution shows some variability, it remains centered around the mean. The optimal $tx_{power}$ values can be obtained by averaging the RSSI values for each beacon.
 
-
-Experimental results in \autoref{fig:beacon-rssi-1m} show that the distribution of $tx_{power}$ is quite instable, while still close to the mean. The best values can be calculated using the mean of the values for each beacon. As we  can see, while it's close to the theoretical value of $-69$, it's a little bit lower, and even well lower for the third beacon, at $-63$.
+Empirical results are consistent with the expected theoretical value of $-69$. The first two beacons yield values very close to this reference, while the third beacon reports a slightly higher RSSI of $-63$. The broader distribution for this beacon may suggest environmental influences affecting signal strength.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{assets/beacon-rssi-1m.pdf}
-    \caption{Variation in RSSI relative to Distance from Beacons}
+    \caption{Experimental RSSI values at 1 meter}
     \label{fig:beacon-rssi-1m}
 \end{figure}
 
-The environmental factor ($N$) typically range from $2$ in almost perfect environments to $4$ in very crowded environments. The experimental data shown in \autoref{fig:beacon-environmental-factor} have been taken with LoS in an almost-perfect environment of a corridor. As we can see, the best match happens for $N=2$ for each beacon, with a relatively low Median Absolute Deviation (MAD). The MAD is preferred here has the logarithmic effect can significantly higher the mean and make it unusable.
+\subsection{Environmental Factor ($N$)}
+The environmental factor $N$ typically ranges from 2 in ideal conditions to 4 in highly obstructed or chaotic environments. Experimental results shown in \autoref{fig:beacon-environmental-factor} support this range. The plots illustrate the Mean Squared Error (MSE) between measured distances and those calculated using various values of $N$ (from 2 to 4), applied to measurements taken from both Experiment 1 (corridor) and Experiment 2 (museum).
+
+In the corridor environment, which features line-of-sight (LoS) conditions and minimal interference, the optimal environmental factor is approximately 2.07. In contrast, measurements taken in the museum, with by complex layouts and significant obstructions, produce a higher MSE across all values of $N$. The lowest error occurs with $N = 2.83$, reflecting the increased signal attenuation due to environmental factors.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\linewidth]{assets/beacon-environmental-factor.pdf}
-    \caption{Comparison of the environmental factors (N)}
+    \includegraphics[width=\linewidth]{assets/beacons-environmental-factor.pdf}
+    \caption{Comparison of environmental factors ($N$) in both test environments}
     \label{fig:beacon-environmental-factor}
 \end{figure}
 
-Theses findings show that during the calibration phase, each beacon must be evaluated individually to determine it's $tx_{power}$ but this value should remain the same even after a change of the environment. Then the environmental factor $N$ must be evaluated for the environment, but remains the same for each beacon, significantly reducing the preparation work.
+\subsection{Summary of Calibration Findings}
 
-\section{Distance to beacons}
+These findings confirm that the theoretical value of $tx_{power} = -69$ is robust and does not require adjustment based on environment. In contrast, the environmental factor $N$ must be calibrated for each new environment. Nevertheless, once determined, the same $N$ can be applied uniformly across all beacons, thus simplifying the setup process.
 
-Experimental results of the variation of the raw distance error relative to the distance to beacons presented in \autoref{fig:beacon-dist-raw-error} confirms the findings of \cite{spachos_ble_2020}, where there is a corelation between the precision and the distance of the beacons. Also, close beacons up to a few meters leads to very low error and small range.
+\section{Distance to Beacons}
+Experimental data from Experiment 1, as shown in \autoref{fig:beacon-dist-raw-error}, confirm the findings reported by \cite{spachos_ble_2020}, which highlight a correlation between ranging precision and beacon distance. Specifically, beacons located within a few meters provide highly accurate distance estimates with minimal error spread.
 
-We can see that the median error for raw distances are between 2 and 3 meters, 75\% of the errors are below 5 meters, and 90\% below 8 meters.
+Analysis of the raw distance errors shows that the median error typically lies between 2 and 3 meters. Moreover, 75\% of distance errors are below 5 meters, and 90\% fall below 8 meters.
 
-% How did I choose the parameters? Which ones?
-
- \autoref{fig:beacon-dist-filtered-error} present the results once the Kalman filter is applied, reducing the medians between 1.5 and 2.5 meters, 75\% of the errors bellow 4 meters but keep the 90\% around 8 meters. 
+After applying a Kalman filter to the data, as presented in \autoref{fig:beacon-dist-filtered-error}, error margins are significantly reduced. The median error decreases to between 1.5 and 2.5 meters, with 75\% of errors below 4 meters. However, the 90\% threshold remains around 8 meters, indicating that although the filter reduces overall noise, extreme conditions still lead to larger errors.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{assets/beacon-dist-raw-error-by-beacon.pdf}
-    \caption{Variation in Raw Distance Error relative to Distance from Beacons}
+    \caption{Raw distance error variation relative to distance from beacons}
     \label{fig:beacon-dist-raw-error}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{assets/beacon-dist-filtered-error-by-beacon.pdf}
-    \caption{Variation in Filtered Distance Error relative to Distance from Beacons}
+    \caption{Filtered distance error variation relative to distance from beacons}
     \label{fig:beacon-dist-filtered-error}
 \end{figure}
-
-
-

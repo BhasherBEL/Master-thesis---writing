@@ -5,171 +5,149 @@
 
 The main objective of this experiment is to assess whether RSSI values from ESP32 BLE beacons can reliably determine a smartphone’s position and detect user proximity to a predefined location within a threshold of three meters or less. This validation is crucial for ensuring that the proposed indoor localization system can accurately detect a user's presence near a point of interest (POI).
 
-In addition to the primary objective, secondary goals include evaluating the impact of environmental factors on localization accuracy and analyzing the system’s responsiveness when the user moves dynamically. Furthermore, the study aims to assess how the density of deployed beacons influences the precision of the location estimations. Finally, the experiment will compare localization accuracy across different smartphone models to determine whether variations in hardware affect the system’s performance.
+In addition to the primary objective, secondary goals include evaluating the impact of environmental factors on localization accuracy and analyzing the system’s responsiveness when the user moves dynamically. Finally, the experiment will compare localization accuracy across different smartphone models to determine whether variations in hardware affect the system’s performance.
 
 \section{Experimental Setup}
 
 \subsection{Hardware and System Architecture}
 
-The experimental setup comprises up to six ESP32 devices running a custom firmware that enables them to operate as BLE beacons. These devices periodically broadcast BLE signals while simultaneously listening for BLE signals that share a predefined signature. When network access is available, they upload their collected data to an MQTT broker; otherwise, they function solely as standalone BLE beacons. In this phase, the collected values from listening will only be used for offline analysis to determine whether dynamically updating the reference RSSI values could improve precision without directly affecting the experiment.
+The experimental setup comprises up to four ESP32 devices running a custom firmware that enables them to operate as BLE beacons. These devices periodically broadcast BLE signals. When network access is available, they upload their position to an MQTT broker; otherwise, they function solely as standalone BLE beacons.
 
 A smartphone application is responsible for collecting and processing the beacon signals. This application retrieves a list of authorized BLE beacon signatures from the MQTT broker and continuously scans for nearby devices that match these known signatures. No user data is transmitted from the smartphone to the server, ensuring privacy for both the user and other individuals within the area.
 
 \subsection{Application Features and Localization Logic}
 
-The smartphone application provides a real-time graphical interface that visualizes the localization process, primarily for debugging and in-depth analysis. A map displays the static positions of the beacons, with each beacon represented by a circle corresponding to the estimated distance from the phone. Additionally, a dot indicates the estimated position of the smartphone, while crosses mark the predefined points of interest.
+The smartphone application provides a real-time graphical interface that visualizes the localization process, primarily for debugging and in-depth analysis. A map displays the static positions of the beacons, with each beacon represented by a circle corresponding to the estimated distance from the phone. Additionally, a dot indicates the estimated position of the smartphone, while crosses mark are the predefined points of interest.
 
 Localization is based on RSSI-based triangulation. A phone is considered to be within a POI when it has been detected at least twice within a three-meter radius. Conversely, the phone is considered to have exited the POI if it is subsequently detected twice at a location beyond five meters. This difference between the entry and exit thresholds is implemented to prevent unstable state changes between being inside and outside a POI. These threshold values have been determined based on preliminary evaluations and may be adjusted for different experimental conditions, depending on beacon placement, artwork density, and the complexity of the indoor environment.
 
 \section{Experimental Procedure}
 
-To systematically evaluate the performance of the system, four distinct experiments will be conducted. These experiments focus on evaluating localization accuracy, the impact of beacon density, differences in smartphone models, and system performance during user movement.
+To systematically evaluate the performance of the system, and it's value within a museum, four distinct experiments will be conducted. These experiments focus on evaluating localization accuracy, differences in smartphone models, impact of museum layouts and its operations within a museum.
 
-\subsection{Experimental Setup}
+\subsection{Experimental layout}
 
-The experiments will take place in a designated room within the university. ESP32 beacons will be installed at predefined locations to provide adequate coverage of all POIs. The POIs correspond to specific reference points where localization should occur accurately. Participants performing the tests will execute a predefined sequence of movements, ensuring uniformity in data collection and minimizing variability caused by human movement patterns.
+The first experiment will take place in a designated corridor within the university, while the others are directly on a floor of the museum. ESP32 beacons will  be installed at predefined locations to provide adequate coverage of all POIs. The POIs correspond to specific reference points where localization should occur accurately. Participants performing the tests will execute a predefined sequence of movements, ensuring uniformity in data collection and minimizing variability caused by human movement patterns.
 
 Localization data, including timestamps for detected entries, exits, and continuous tracking points, will be logged during all experiments. Additionally, manual records will be kept to compare the system's performance with a ground truth reference, ensuring accurate evaluation.
 
-\subsection{Experiment 1: Localization Accuracy and Responsiveness}
+\subsection{Experiment 1: Localization Accuracy}
+\label{exp:1_accuracy}
 
-This experiment aims to determine how quickly and reliably the system detects a user entering or exiting a POI and whether position detection remains stable over time.
+The first experiment focus on the beacons data directly. It aims to calibrate the meta-parameters and analyzes the precision of the distance estimation between the phone and the beacons. The experiment take place in a corridor, with no obstacle and a direct Line of Sight (LoS) between the phone and the sensors. The sensor is placed at 1.5 meters from the ground and measurements are taken at every meter, starting at "0" ($L_0$), with the phone touching the sensor, and up to 15 meters away from it ($L_{15}$). At each step, the phone take measurements for 20 seconds. Each sensor is tested with no other sensor active at the same time to minimize inteferences.
 
-\begin{enumerate}
-    \item The user stands on point $L_2$, outside of the POI area, for one minute.
-    \item The user enters the POI (green circle) area at constant speed and stands on point $L_1$, at one meter from its center.
-    \item The system records the time required to detect entry and logs the detected position continuously for one minute.
-    \item If localization fluctuates, and the user is mistakenly marked as outside the POI, the number and duration of such misclassifications are recorded.
-    \item The user exits the POI (red circle) at constant speed, and the system logs the delay before detecting the exit.
-\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.6]
+        % Room dimensions 
+        \draw[thick] (0,0) rectangle (17,2);  
+        % Grid (optional, for reference)
+        \draw[gray!30, step=1] (0,0) grid (17, 2);
+        
+        % ESP32 devices (blue dots)
+        \filldraw[blue] (1, 1) circle (0.2) node[below] {Beacon};
+
+        % User positions (X marks)
+        \filldraw (1.1, 1) circle (0.1) node[above] {$L_0$};
+        \filldraw (2, 1) circle (0.1) node[above] {$L_1$};
+        \filldraw (3, 1) circle (0.1) node[above] {$L_2$};
+        \filldraw (4, 1) circle (0.1) node[above] {$L_3$};
+        \filldraw (5, 1) circle (0.1) node[above] {$L_4$};
+        \filldraw (6, 1) circle (0.1) node[above] {$L_5$};
+        \filldraw (7, 1) circle (0.1) node[above] {$L_6$};
+        \filldraw (8, 1) circle (0.1) node[above] {$L_7$};
+        \filldraw (9, 1) circle (0.1) node[above] {$L_8$};
+        \filldraw (10, 1) circle (0.1) node[above] {$L_9$};
+        \filldraw (11, 1) circle (0.1) node[above] {$L_{10}$};
+        \filldraw (12, 1) circle (0.1) node[above] {$L_{11}$};
+        \filldraw (13, 1) circle (0.1) node[above] {$L_{12}$};
+        \filldraw (14, 1) circle (0.1) node[above] {$L_{13}$};
+        \filldraw (15, 1) circle (0.1) node[above] {$L_{14}$};
+        \filldraw (16, 1) circle (0.1) node[above] {$L_{15}$};
+        
+        % Scale indicator
+        \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
+    \end{tikzpicture}
+    \caption{Experimental setup for the first experiment showing one beacon and all the references distances.}
+    \label{fig:exp1_setup}
+\end{figure}
+
+\subsection{Experiment 2: Impact of museum layout}
+\label{exp:2_museum}
+
+The second experiment focus on the impact of the museum layout on the results. It takes places directly inside the museum on the floor used for this experimentation. All the devices are on the floor, and the user keep the smartphone in hand, in front of him. The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. Only the data at the different locations are considered, so the path between them has no impact on the results. Points $L_{0,1,2,4,5,8}$ are inside the covered area while $L_{3,6,7}$ are outside of it, in order to analyze the behavior in this edge case. The direct Lines of Sight (LoS) are never guaranteed between the beacons and the phone.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=0.4]
         % Room dimensions 
-        \draw[thick] (0,0) rectangle (11.913,11.900);  
+        \draw[thick] (0,0) rectangle (35.417, 9.812);  
         % Grid (optional, for reference)
-        \draw[gray!30, step=1] (0,0) grid (11.913,11.900);
+        \draw[gray!30, step=1] (0,0) grid (35.417, 9.812);
         
         % ESP32 devices (blue dots)
-        \filldraw[blue] (1.870,2.092) circle (0.2) node[below] {B1};
-        \filldraw[blue] (10.043,2.092) circle (0.2) node[below] {B2};
-        \filldraw[blue] (7.888,7.875) circle (0.2) node[above] {B3};
-        
-        % Point of Interest (red cross)
-        \filldraw[red, thick] (2,5) circle (0.2) node[left] {P};
+        \filldraw[blue] (26.681, 0.252) circle (0.2) node[below] {ESP-1};
+        \filldraw[blue] (25.608, 9.221) circle (0.2) node[below] {ESP-2};
+        \filldraw[blue] (11.209, 9.197) circle (0.2) node[below] {ESP-3};
+        \filldraw[blue] (0, 0) circle (0.2) node[below] {ESP-4};
 
         % User positions (X marks)
-        \filldraw (3,5) circle (0.2) node[above] {$L_1$};
-        \filldraw (7,5) circle (0.2) node[above] {$L_2$};
-            
-        \begin{scope}
-            \clip (0,0) rectangle (11.2,12.7);
-            % 3m radius around POI (dashed circle)
-            \draw[red, dashed] (2,5) circle (4);
-            \draw[green, dashed] (2,5) circle (2);
-        \end{scope}
+        \filldraw (18.201, 3.037) circle (0.1) node[above] {$L_0$, $L_8$};
+        \filldraw (10.962, 0.531) circle (0.1) node[above] {$L_1$};
+        \filldraw (5.590, 0.777) circle (0.1) node[above] {$L_2$};
+        \filldraw (3.642, 6.864) circle (0.1) node[above] {$L_3$};
+        \filldraw (9.175, 5.949) circle (0.1) node[above] {$L_4$};
+        \filldraw (23.852, 5.923) circle (0.1) node[above] {$L_5$};
+        \filldraw (28.635, 5.005) circle (0.1) node[above] {$L_6$};
+        \filldraw (33.240, 3.287) circle (0.1) node[above] {$L_7$};
         
         % Scale indicator
         \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
     \end{tikzpicture}
-    \caption{Experimental setup for the first experiment showing three ESP32 devices and a single POI with its detection radius.}
-    \label{fig:exp1_setup}
+    \caption{Experimental setup for the second experiment showing the beacons and some reference points.}
+    \label{fig:exp2_museum}
 \end{figure}
 
-\subsection{Experiment 2: Impact of Beacon Density}
-This experiment evaluates how the number of deployed ESP32 beacons affects localization accuracy by progressively adding beacons to the setup while maintaining the same test procedure.
-\begin{enumerate}
-    \item Steps from Experiment 1 are repeated for this configuration, but a fourth beacon (B4) is added and the test is repeated.
-    \item A fifth beacon (B5) is added and the test is repeated.
-    \item Finally, a sixth beacon (B6) is added completing the test series.
-\end{enumerate}
+\subsection{Experiment 3: Detecting POI and providing meaningful data}
+% Seek for supervisor's opinions
+
+The third experiment focus on the user experience within the exhibition. It has been chosen here to provide to the user two layers of information trough it's visit. First, an overview by section, to provide general information about the sections and their main art pieces, then the application provide the list of the art pieces of the section and close to the visitor, and he has to ability to chose to get more information on them by interacting with the application. This way, the visitor can follow the whole floor without having to interact with the application, but only by moving around areas, but can chose to move by it's own or to get more information on the sections he wants to.
+
+The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. The user stay still for 20 seconds in each location, then move at a walk pace to the next one. The exact path is shown by dashed lines on the \autoref{fig:exp3_poi}. The exact time the visitor is detected in each area is recorded alongside the classical data.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=0.4]
-        % Room dimensions
-        \draw[thick] (0,0) rectangle (11.2,12.7);  
+        % Room dimensions 
+        \draw[thick] (0,0) rectangle (35.417, 9.812);  
+        
+        % Sections
+        \draw[fill=red!20] (29.25, 0.5) rectangle (34.917, 9.312);
+        \draw[fill=red!20] (24.25, 0.5) rectangle (28.75, 9.312);
+        \draw[fill=red!20] (13.25, 6.312) rectangle (21.75, 9.312);
+        \draw[fill=red!20] (13.25, 0.5) rectangle (21.75, 3.812);
+        \draw[fill=red!20] (6.25, 0.5) rectangle (10.75, 9.312);
+        \draw[fill=red!20] (0.5, 4.812) rectangle (5.75, 9.312);
+        
         % Grid (optional, for reference)
-        \draw[gray!30, step=1] (0,0) grid (11.2,12.7);
-        % Original ESP32 devices (blue dots)
-        \filldraw[blue] (1,2.5) circle (0.2) node[below] {B1};
-        \filldraw[blue] (10,2.5) circle (0.2) node[below] {B2};
-        \filldraw[blue] (7,10) circle (0.2) node[above] {B3};
-        % Additional beacons (different color)
-        \filldraw[cyan] (1,10) circle (0.2) node[left] {B4};
-        \filldraw[cyan] (10,6) circle (0.2) node[left] {B5};
-        \filldraw[cyan] (4.5,3) circle (0.2) node[below] {B6};
-        % Point of Interest (red cross)
-        \filldraw[red, thick] (2,5) circle (0.2) node[left] {P};
-        % User positions (X marks)
-        \filldraw (3,5) circle (0.2) node[above] {$L_1$};
-        \filldraw (7,5) circle (0.2) node[above] {$L_2$};
-        \begin{scope}
-            \clip (0,0) rectangle (11.2,12.7);
-            % 3m radius around POI (dashed circle)
-            \draw[red, dashed] (2,5) circle (4);
-            \draw[green, dashed] (2,5) circle (2);
-        \end{scope}
+        \draw[gray!30, step=1] (0,0) grid (35.417, 9.812);
+        
+        % ESP32 devices (blue dots)
+        \filldraw[blue] (26.681, 0.252) circle (0.2) node[below] {ESP-1};
+        \filldraw[blue] (25.608, 9.221) circle (0.2) node[below] {ESP-2};
+        \filldraw[blue] (11.209, 9.197) circle (0.2) node[below] {ESP-3};
+        \filldraw[blue] (0, 0) circle (0.2) node[below] {ESP-4};
+
+        % User positions
+        \filldraw (23, 9) circle (0.1) node[below] {$L_0$};
+        
         % Scale indicator
         \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
     \end{tikzpicture}
-    \caption{Experimental setup showing all six ESP32 devices, with B4-B6 representing the additional beacons for density testing.}
-    \label{fig:exp2_setup}
+    \caption{Experimental setup for the third experiment showing The beacons and the POI areas.}
+    \label{fig:exp3_poi}
 \end{figure}
 
-\subsection{Experiment 3: Effect of Smartphone Models}
-This experiment investigates whether localization accuracy varies across different Android smartphone models using the maximum beacon density configuration.
-\begin{enumerate}
-    \item The complete procedure from Experiment 1 is performed using each test device.
-    \item Results are compared across devices to evaluate hardware-dependent variations.
-\end{enumerate}
+\subsection{Experiment 4: Repeat with other phones}
 
-\subsection{Experiment 4: Impact of Dynamic Movement}
-This experiment evaluates the system's ability to track a moving user between multiple POIs.
-\begin{enumerate}
-    \item Using the three-beacon configuration, two additional POIs are added to the setup.
-    \item The user starts at $L_2$ and walks at a constant pace toward $L_1$.
-    \item After one minute at $L_1$, the user moves to $L_3$ and stand for one minute.
-    \item After one minute at $L_3$, the user moves to $L_4$ and stand for one minute.
-    \item The system logs transition times and tracking consistency throughout the movement.
-\end{enumerate}
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[scale=0.6]
-        % Room dimensions
-        \draw[thick] (0,0) rectangle (11.2,12.7);  
-        % Grid (optional, for reference)
-        \draw[gray!30, step=1] (0,0) grid (11.2,12.7);
-        % All ESP32 devices
-        \filldraw[blue] (1,2.5) circle (0.2) node[below] {B1};
-        \filldraw[blue] (10,2.5) circle (0.2) node[below] {B2};
-        \filldraw[blue] (7,10) circle (0.2) node[above] {B3};
-        % Multiple POIs
-        \filldraw[red, thick] (2,5) circle (0.2) node[left] {P1};
-        \filldraw[red, thick] (8,8) circle (0.2) node[left] {P2};
-        \filldraw[red, thick] (5,3) circle (0.2) node[below] {P3};
-        % User positions and path
-        \filldraw (3,5) circle (0.2) node[above] {$L_1$};
-        \filldraw (7,5) circle (0.2) node[above] {$L_2$};
-        \filldraw (9,8) circle (0.2) node[right] {$L_3$};
-        \filldraw (5,4) circle (0.2) node[above] {$L_4$};
-        % Movement path
-        \draw[->, dashed] (7,5) -- (3,5) -- (9,8) -- (5,4);
-        \begin{scope}
-            \clip (0,0) rectangle (11.2,12.7);
-            % Detection radii around POIs
-            \draw[red, dashed] (2,5) circle (4);
-            \draw[green, dashed] (2,5) circle (2);
-            \draw[red, dashed] (8,8) circle (4);
-            \draw[green, dashed] (8,8) circle (2);
-            \draw[red, dashed] (5,3) circle (4);
-            \draw[green, dashed] (5,3) circle (2);
-        \end{scope}
-        % Scale indicator
-        \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
-    \end{tikzpicture}
-    \caption{Experimental setup for dynamic movement testing, showing all beacons, multiple POIs, and the user movement path.}
-    \label{fig:exp4_setup}
-\end{figure}
+The fourth and last experiment aim to ensure the precision of the system with multiple other phones. 
