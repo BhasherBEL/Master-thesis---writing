@@ -3,15 +3,54 @@
 
 \section{Objectives}
 
-The main objective of this experiment is to assess whether RSSI values from ESP32 BLE beacons can reliably determine a smartphone’s position and detect user proximity to a predefined location within a threshold of three meters or less. This validation is crucial for ensuring that the proposed indoor localization system can accurately detect a user's presence near a point of interest (POI).
+The primary objective of this study is to evaluate the reliability of RSSI (Received Signal Strength Indicator) values from ESP32 Bluetooth Low Energy (BLE) beacons for determining smartphone positioning and detecting user proximity to predefined areas or points of interest (POIs) within a threshold of three meters or less. This validation is essential for ensuring that the proposed indoor localization system can accurately detect a user's presence near specific locations in museum environments.
 
-In addition to the primary objective, secondary goals include evaluating the impact of environmental factors on localization accuracy and analyzing the system’s responsiveness when the user moves dynamically. Finally, the experiment will compare localization accuracy across different smartphone models to determine whether variations in hardware affect the system’s performance.
+In addition to the primary objective, the study addresses several secondary goals. First, the impact of environmental factors, such as signal interference, obstacles, and layout complexity, on localization accuracy will be assessed to ensure robustness in real-world settings. Second, the system’s responsiveness to dynamic user movements will be evaluated, focusing on latency and stability during transitions between areas and POIs. Finally, the study will compare localization accuracy across different smartphone models to determine whether variations in hardware affect the system’s reliability. These secondary objectives aim to provide a comprehensive evaluation of the system’s feasibility and generalizability.
+
+\section{Considerations}
+
+\subsection{Privacy and ethical considerations}
+
+Protecting visitor privacy in public cultural spaces such as museums is essential, both for museums and their audiences. From an institutional perspective, it enables compliance with strict and often complex European data protection regulations (such as the General Data Protection Regulation, GDPR), while from the visitor's perspective, it fosters trust and encourages acceptance of digital technologies within the museum environment.
+
+Traditional indoor localization systems often rely on centralized servers for data processing, which may result in sensitive location data being stored or transferred externally. This introduces legal and ethical risks, particularly when data can potentially be linked to identifiable individuals or behavioral patterns. However, recent developments in privacy-focused computing demonstrate that it is feasible to maintain localization functionality without compromising user privacy \cite{alletto_indoor_2016, spachos_ble_2020}.
+
+In this study, privacy protection is achieved through a local-only processing model. All position computations are performed directly on the visitor’s smartphone. No user-identifiable data or location history is transmitted to external systems without the express user consent. The server only provides static configuration data (such as beacon identifiers and positions), ensuring that all tracking and decision-making remains strictly client-side. This design minimizes the risk of privacy breaches and aligns with best practices for responsible personal data processing \cite{cnil-recomendation-mobile}.
+
+\subsection{Sustainability and energy efficiency}
+
+Sustainability is crucial for museums as they aim to minimize their environmental impact and meet the expectations of eco-conscious visitors. By adopting sustainable practices, museums enhance their reputation and contribute positively to their communities. This commitment extends to the technologies they employ, including IT-enhanced solutions like indoor localization. 
+
+Integrating technologies such as Bluetooth Low Energy (BLE) beacons aligns well with sustainability goals. BLE beacons are known for their energy efficiency, often functioning for months or years on a single battery or even designed to operate using solar cells \cite{spachos_ble_2020}, which reduces electronic waste and lowers the carbon footprint.
+
+\subsection{Sustainability and Energy Efficiency}
+
+Sustainability is an increasingly critical responsibility across public institutions, and museums are no exception. Their role in promoting sustainability is twofold: on the one hand, museums, as any actor, must address their direct environmental impact through energy-efficient infrastructure, responsible material use, and sustainable operational practices. On the other hand, they also serve as cultural and educational institutions that can foster sustainable development indirectly—by raising public awareness, inspiring behavioral change, and supporting interdisciplinary research on sustainability and climate resilience.
+
+As emphasized by the International Council of Museums (ICOM) \cite{icom_sustainability}, museums are "perfectly positioned to address and enhance sustainability" through collaboration with communities, knowledge creation, and the promotion of planetary and societal well-being. This vision aligns with a growing movement within museums to contribute to the fulfillment of the United Nations Sustainable Development Goals (SDGs) \cite{onofri_life_2024, rodriguez_contribution_2024}.
+
+Against this backdrop, technological solutions implemented within museum environments must be evaluated not only on performance metrics but also on their energy efficiency, environmental footprint, and alignment with institutional sustainability goals. The indoor localization system developed in this study is designed with such responsibilities in mind. Specifically, it uses ESP32-based Bluetooth Low Energy (BLE) beacons, which are known for their low power consumption and can operate for extended periods on minimal energy. Some variants may also harness solar energy, reducing battery replacement cycles and electronic waste \cite{spachos_ble_2020}.
+
+By opting for a lightweight, low-maintenance infrastructure, this system helps minimize long-term environmental impact, while meeting technological requirements for real-time positioning. It reflects an intentional effort to align technical implementation with the broader sustainability goals increasingly embraced by cultural institutions worldwide.
+
+\subsection{User Experience and Engagement}
+
+Current research on indoor localization in cultural institutions has primarily focused on technical evaluation metrics such as accuracy and signal strength, with relatively few studies addressing user-centered outcomes. Visitor engagement, perception of usefulness, and interface design remain underexplored dimensions.  
+
+For example, in \cite{alletto_indoor_2016}, personalization is introduced through a preliminary questionnaire, but systemic user feedback on the localization experience itself is largely absent. In this project, although full-scale user evaluation is beyond the scope, preliminary efforts were made to incorporate user-oriented features, such as real-time visual feedback on location and a simplified interface where the visitor can still choose to go deepen or against the automatic suggestions. Those behaviors as well as the popularity of the different areas are collected anonymously to assess both popularity and perceived added value. 
 
 \section{Experimental Setup}
 
 \subsection{Hardware and System Architecture}
 
-The experimental setup comprises up to four ESP32 devices running a custom firmware that enables them to operate as BLE beacons. These devices periodically broadcast BLE signals. When network access is available, they upload their position to an MQTT broker; otherwise, they function solely as standalone BLE beacons.
+The experimental setup comprises up to four ESP32 devices running a custom firmware that enables them to operate as BLE beacons. A picture of an ESP32 is provided at \autoref{fig:esp32}. These devices periodically broadcast BLE signals. When network access is available, they upload their position to an MQTT broker; otherwise, they function solely as standalone BLE beacons.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/image-esp32.jpg}
+    \caption{Photo of the ESP32}
+    \label{fig:esp32}
+\end{figure}
 
 A smartphone application is responsible for collecting and processing the beacon signals. This application retrieves a list of authorized BLE beacon signatures from the MQTT broker and continuously scans for nearby devices that match these known signatures. No user data is transmitted from the smartphone to the server, ensuring privacy for both the user and other individuals within the area.
 
@@ -27,7 +66,14 @@ To systematically evaluate the performance of the system, and it's value within 
 
 \subsection{Experimental layout}
 
-The first experiment will take place in a designated corridor within the university, while the others are directly on a floor of the museum. ESP32 beacons will  be installed at predefined locations to provide adequate coverage of all POIs. The POIs correspond to specific reference points where localization should occur accurately. Participants performing the tests will execute a predefined sequence of movements, ensuring uniformity in data collection and minimizing variability caused by human movement patterns.
+The first experiment will take place in a designated corridor within the university, while the others are directly on a floor of the museum. A picture of that floor is provided in \autoref{fig:floor-6}. ESP32 beacons will  be installed at predefined locations to provide adequate coverage of all POIs. The POIs correspond to specific reference points where localization should occur accurately. Participants performing the tests will execute a predefined sequence of movements, ensuring uniformity in data collection and minimizing variability caused by human movement patterns.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{assets/image-floor.jpg}
+    \caption{Photo of the 6th floor of Musée L}
+    \label{fig:floor-6}
+\end{figure}
 
 Localization data, including timestamps for detected entries, exits, and continuous tracking points, will be logged during all experiments. Additionally, manual records will be kept to compare the system's performance with a ground truth reference, ensuring accurate evaluation.
 

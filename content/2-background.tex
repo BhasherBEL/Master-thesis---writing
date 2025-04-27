@@ -1,4 +1,4 @@
-\chapter{Background}
+\chapter{Background and Related Work}
 \label{chap:background}
 
 \section{Localization Technologies}
@@ -172,3 +172,9 @@ Some studies explore range-free techniques that do not rely on RSSI. However, th
 In a museum setting, localization requires a balance between accuracy, stability, and ease of deployment. While fingerprinting and machine learning-based methods offer higher precision, their reliance on extensive pre-data collection and frequent retraining makes them impractical for dynamic environments where room layouts may change. Similarly, range-free techniques, which perform well in large-scale deployments, are not suitable for the relatively small indoor spaces of museums.  
 
 Given these constraints, trilateration emerges as the most viable solution. Although it is an older technique, it remains a robust and resilient method that provides sufficient accuracy without the need for extensive calibration or high infrastructure costs. By relying on RSSI-based distance estimation from multiple beacons, trilateration offers a stable and cost-effective approach that aligns well with the requirements of a museum environment.
+
+\section{Application in museums}
+
+Bluetooth Low Energy (BLE) has been extensively studied in relation to the unique layouts of museums. For instance, \cite{barsocchi_detecting_2021} utilizes BLE beacons as proximity sensors, while \cite{verde_indoor_2023} focuses on determining a visitor's location within a specific room rather than identifying individual art pieces, enabling the delivery of relevant content in a broader context. 
+
+In the realm of indoor localization, \cite{spachos_ble_2020} employed Kalman filtering to enhance distance estimation, achieving an error of less than 3.5 meters for 95\% of readings with raw data, and 3 meters with filtered data. This indicates that filtering uncertainties in raw data can significantly reduce average errors. The study found that when the receiver is within 50 centimeters of a beacon, the accuracy of the system is notably high, suggesting that positioning beacons close to Points of Interest (POIs) can enhance overall performance. Conversely, it is also noted that if beacons are spaced less than one meter apart, the accuracy may decrease.
