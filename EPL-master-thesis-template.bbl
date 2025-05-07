@@ -1,0 +1,143 @@
+\begin{thebibliography}{10}
+
+\bibitem{ali_locali_2017}
+Muhammad~Usman Ali, Soojung Hur, and Yongwan Park.
+\newblock {LOCALI}: {Calibration}-{Free} {Systematic} {Localization} {Approach}
+  for {Indoor} {Positioning}.
+\newblock {\em Sensors}, 17(6):1213, June 2017.
+\newblock Number: 6 Publisher: Multidisciplinary Digital Publishing Institute.
+
+\bibitem{alletto_indoor_2016}
+Stefano Alletto, Rita Cucchiara, Giuseppe Del~Fiore, Luca Mainetti, Vincenzo
+  Mighali, Luigi Patrono, and Giuseppe Serra.
+\newblock An {Indoor} {Location}-{Aware} {System} for an {IoT}-{Based} {Smart}
+  {Museum}.
+\newblock {\em IEEE Internet of Things Journal}, 3(2):244--253, April 2016.
+
+\bibitem{gai_epl}
+bureau de faculté de l'École Polytechnique~de Louvain.
+\newblock Règlement des travaux de fin d’études à l’ecole polytechnique
+  de louvain.
+\newblock \url{https://moodle.uclouvain.be/mod/page/view.php?id=134701}, 2025.
+\newblock Accessed: 2025-04-27.
+
+\bibitem{cai_museum_2015}
+Dawei Cai.
+\newblock Museum {Navigation} based on {NFC} {Localization} {Approach} and
+  {Automatic} {Guidance} {System}.
+\newblock {\em International Journal of Computer Applications}, 120(1):1--7,
+  June 2015.
+
+\bibitem{chen_range-free_2013}
+Chi-Chang Chen, Chi-Yu Chang, and Yan-Nong Li.
+\newblock Range-{Free} {Localization} {Scheme} in {Wireless} {Sensor}
+  {Networks} {Based} on {Bilateration}.
+\newblock {\em International Journal of Distributed Sensor Networks},
+  9(1):620248, January 2013.
+\newblock Publisher: SAGE Publications.
+
+\bibitem{chiappa_emotions_2014}
+Giacomo~Del Chiappa, Luisa Andreu, and Martina~G. Gallarza.
+\newblock Emotions and visitors’ satisfaction at a museum.
+\newblock {\em International Journal of Culture, Tourism and Hospitality
+  Research}, 8(4):420--431, September 2014.
+\newblock Publisher: Emerald Group Publishing Limited.
+
+\bibitem{cnil-recomendation-mobile}
+Commission Nationale~Informatique et~Liberté.
+\newblock Recommandation relative aux applications mobiles.
+\newblock
+  \url{https://www.cnil.fr/sites/cnil/files/2024-09/recommandation-applications-mobiles.pdf}.
+\newblock Accessed on 2025-04-24.
+
+\bibitem{icom_sustainability}
+{International Council of Museums (ICOM)}.
+\newblock Sustainability and local development.
+\newblock
+  \url{https://icom.museum/en/research/sustainability-and-local-development/},
+  2020.
+\newblock Accessed: 2025-04-24.
+
+\bibitem{jiang_fingerprint_2021}
+Jehn-Ruey Jiang, Hanas Subakti, and Hui-Sung Liang.
+\newblock Fingerprint {Feature} {Extraction} for {Indoor} {Localization}.
+\newblock {\em Sensors}, 21(16):5434, August 2021.
+
+\bibitem{liu_survey_2020}
+Fen Liu, Jing Liu, Yuqing Yin, Wenhan Wang, Donghai Hu, Pengpeng Chen, and
+  Qiang Niu.
+\newblock Survey on {WiFi}-based indoor positioning techniques.
+\newblock {\em IET Communications}, 14(9):1372--1383, 2020.
+\newblock \_eprint:
+  https://onlinelibrary.wiley.com/doi/pdf/10.1049/iet-com.2019.1059.
+
+\bibitem{mainetti_survey_2014}
+Luca Mainetti, Luigi Patrono, and Ilaria Sergi.
+\newblock A survey on indoor positioning systems.
+\newblock In {\em 2014 22nd {International} {Conference} on {Software},
+  {Telecommunications} and {Computer} {Networks} ({SoftCOM})}, pages 111--120,
+  September 2014.
+
+\bibitem{nessa_survey_2020}
+Ahasanun Nessa, Bhagawat Adhikari, Fatima Hussain, and Xavier~N. Fernando.
+\newblock A {Survey} of {Machine} {Learning} for {Indoor} {Positioning}.
+\newblock {\em IEEE Access}, 8:214945--214965, 2020.
+
+\bibitem{onofri_life_2024}
+Laura Onofri, Cristina Ojeda, Itziar Ruiz-Gauna, Francisco Greno, and Anil
+  Markandya.
+\newblock A {Life} {Cycle} and {Economic} {Assessment} of the {Peggy}
+  {Guggenheim} {Collection} in {Venice} for {Environmental} and {Economic}
+  {Sustainability}.
+\newblock {\em Sustainability}, 16(16):6735, January 2024.
+\newblock Number: 16 Publisher: Multidisciplinary Digital Publishing Institute.
+
+\bibitem{pallud_impact_2017}
+Jessie Pallud.
+\newblock Impact of interactive technologies on stimulating learning
+  experiences in a museum.
+\newblock {\em Information \& Management}, 54(4):465--478, June 2017.
+
+\bibitem{rodriguez_contribution_2024}
+María Victoria~Rosique Rodríguez, Carmen de-Prado Ruiz-Santaella, and María
+  Ángeles~Jordano Barbudo.
+\newblock Contribution of cultural heritage resources to the 2030 agenda
+  {SDGS}.
+\newblock {\em Journal of Cultural Heritage Management and Sustainable
+  Development}, ahead-of-print(ahead-of-print), February 2024.
+\newblock Publisher: Emerald Publishing Limited.
+
+\bibitem{shang_overview_2022}
+Shuang Shang and Lixing Wang.
+\newblock Overview of {WiFi} fingerprinting-based indoor positioning.
+\newblock {\em IET Communications}, 16(7):725--733, 2022.
+\newblock \_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1049/cmu2.12386.
+
+\bibitem{shen_indoor_2023}
+Xiaoyan Shen, Boyang Xu, and Hongming Shen.
+\newblock Indoor {Localization} {System} {Based} on {RSSI}-{APIT} {Algorithm}.
+\newblock {\em Sensors}, 23(24):9620, December 2023.
+
+\bibitem{spachos_ble_2020}
+Petros Spachos and Konstantinos~N. Plataniotis.
+\newblock {BLE} {Beacons} for {Indoor} {Positioning} at an {Interactive}
+  {IoT}-{Based} {Smart} {Museum}.
+\newblock {\em IEEE Systems Journal}, 14(3):3483--3493, September 2020.
+\newblock Conference Name: IEEE Systems Journal.
+
+\bibitem{tom_dieck_enhancing_2018}
+M.~Claudia tom Dieck, Timothy~Hyungsoo Jung, and Dario tom Dieck.
+\newblock Enhancing art gallery visitors’ learning experience using wearable
+  augmented reality: generic learning outcomes perspective.
+\newblock {\em Current Issues in Tourism}, 21(17):2014--2034, November 2018.
+\newblock Publisher: Routledge \_eprint:
+  https://doi.org/10.1080/13683500.2016.1224818.
+
+\bibitem{gai_uclouvain}
+Jean-François van Drooghenbroeck.
+\newblock Utilisation des intelligences artificielles génératives: Note à
+  l’attention des étudiantes et étudiants de l’uclouvain.
+\newblock \url{https://www.uclouvain.be/consignes-chatgpt}, 2024.
+\newblock Accessed: 2025-04-27.
+
+\end{thebibliography}

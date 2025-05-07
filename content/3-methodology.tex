@@ -9,7 +9,7 @@ In addition to the primary objective, the study addresses several secondary goal
 
 \section{Considerations}
 
-\subsection{Privacy and ethical considerations}
+\subsection{Privacy and Ethical Considerations}
 
 Protecting visitor privacy in public cultural spaces such as museums is essential, both for museums and their audiences. From an institutional perspective, it enables compliance with strict and often complex European data protection regulations (such as the General Data Protection Regulation, GDPR), while from the visitor's perspective, it fosters trust and encourages acceptance of digital technologies within the museum environment.
 
@@ -17,17 +17,11 @@ Traditional indoor localization systems often rely on centralized servers for da
 
 In this study, privacy protection is achieved through a local-only processing model. All position computations are performed directly on the visitor’s smartphone. No user-identifiable data or location history is transmitted to external systems without the express user consent. The server only provides static configuration data (such as beacon identifiers and positions), ensuring that all tracking and decision-making remains strictly client-side. This design minimizes the risk of privacy breaches and aligns with best practices for responsible personal data processing \cite{cnil-recomendation-mobile}.
 
-\subsection{Sustainability and energy efficiency}
-
-Sustainability is crucial for museums as they aim to minimize their environmental impact and meet the expectations of eco-conscious visitors. By adopting sustainable practices, museums enhance their reputation and contribute positively to their communities. This commitment extends to the technologies they employ, including IT-enhanced solutions like indoor localization. 
-
-Integrating technologies such as Bluetooth Low Energy (BLE) beacons aligns well with sustainability goals. BLE beacons are known for their energy efficiency, often functioning for months or years on a single battery or even designed to operate using solar cells \cite{spachos_ble_2020}, which reduces electronic waste and lowers the carbon footprint.
-
 \subsection{Sustainability and Energy Efficiency}
 
-Sustainability is an increasingly critical responsibility across public institutions, and museums are no exception. Their role in promoting sustainability is twofold: on the one hand, museums, as any actor, must address their direct environmental impact through energy-efficient infrastructure, responsible material use, and sustainable operational practices. On the other hand, they also serve as cultural and educational institutions that can foster sustainable development indirectly—by raising public awareness, inspiring behavioral change, and supporting interdisciplinary research on sustainability and climate resilience.
+Sustainability is an increasingly critical responsibility across public institutions, and museums are no exception. Their role in promoting sustainability is twofold: on the one hand, museums, as any actor, must address their direct environmental impact through energy-efficient infrastructure, responsible material use, and sustainable operational practices. On the other hand, they also serve as cultural and educational institutions that can foster sustainable development indirectly, by raising public awareness, inspiring behavioural change, and supporting interdisciplinary research on sustainability and climate resilience.
 
-As emphasized by the International Council of Museums (ICOM) \cite{icom_sustainability}, museums are "perfectly positioned to address and enhance sustainability" through collaboration with communities, knowledge creation, and the promotion of planetary and societal well-being. This vision aligns with a growing movement within museums to contribute to the fulfillment of the United Nations Sustainable Development Goals (SDGs) \cite{onofri_life_2024, rodriguez_contribution_2024}.
+As emphasized by the International Council of Museums (ICOM) \cite{icom_sustainability}, museums are "perfectly positioned to address and enhance sustainability" through collaboration with communities, knowledge creation, and the promotion of planetary and societal well-being. This vision aligns with a growing movement within museums to contribute to the fulfilment of the United Nations Sustainable Development Goals (SDGs) \cite{onofri_life_2024, rodriguez_contribution_2024}.
 
 Against this backdrop, technological solutions implemented within museum environments must be evaluated not only on performance metrics but also on their energy efficiency, environmental footprint, and alignment with institutional sustainability goals. The indoor localization system developed in this study is designed with such responsibilities in mind. Specifically, it uses ESP32-based Bluetooth Low Energy (BLE) beacons, which are known for their low power consumption and can operate for extended periods on minimal energy. Some variants may also harness solar energy, reducing battery replacement cycles and electronic waste \cite{spachos_ble_2020}.
 
@@ -35,9 +29,9 @@ By opting for a lightweight, low-maintenance infrastructure, this system helps m
 
 \subsection{User Experience and Engagement}
 
-Current research on indoor localization in cultural institutions has primarily focused on technical evaluation metrics such as accuracy and signal strength, with relatively few studies addressing user-centered outcomes. Visitor engagement, perception of usefulness, and interface design remain underexplored dimensions.  
+Current research on indoor localization in cultural institutions has primarily focused on technical evaluation metrics such as accuracy and signal strength, with relatively few studies addressing user-centred outcomes. Visitor engagement, perception of usefulness, and interface design remain underexplored dimensions.  
 
-For example, in \cite{alletto_indoor_2016}, personalization is introduced through a preliminary questionnaire, but systemic user feedback on the localization experience itself is largely absent. In this project, although full-scale user evaluation is beyond the scope, preliminary efforts were made to incorporate user-oriented features, such as real-time visual feedback on location and a simplified interface where the visitor can still choose to go deepen or against the automatic suggestions. Those behaviors as well as the popularity of the different areas are collected anonymously to assess both popularity and perceived added value. 
+For example, in \cite{alletto_indoor_2016}, personalization is introduced through a preliminary questionnaire, but systemic user feedback on the localization experience itself is largely absent. In this project, although full-scale user evaluation is beyond the scope, preliminary efforts were made to incorporate user-oriented features, such as real-time visual feedback on location and a simplified interface where the visitor can still choose to go deepen or against the automatic suggestions. Those behaviours as well as the popularity of the different areas are collected anonymously to assess both popularity and perceived added value. 
 
 \section{Experimental Setup}
 
@@ -45,20 +39,15 @@ For example, in \cite{alletto_indoor_2016}, personalization is introduced throug
 
 The experimental setup comprises up to four ESP32 devices running a custom firmware that enables them to operate as BLE beacons. A picture of an ESP32 is provided at \autoref{fig:esp32}. These devices periodically broadcast BLE signals. When network access is available, they upload their position to an MQTT broker; otherwise, they function solely as standalone BLE beacons.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{assets/image-esp32.jpg}
-    \caption{Photo of the ESP32}
-    \label{fig:esp32}
-\end{figure}
-
 A smartphone application is responsible for collecting and processing the beacon signals. This application retrieves a list of authorized BLE beacon signatures from the MQTT broker and continuously scans for nearby devices that match these known signatures. No user data is transmitted from the smartphone to the server, ensuring privacy for both the user and other individuals within the area.
 
 \subsection{Application Features and Localization Logic}
 
-The smartphone application provides a real-time graphical interface that visualizes the localization process, primarily for debugging and in-depth analysis. A map displays the static positions of the beacons, with each beacon represented by a circle corresponding to the estimated distance from the phone. Additionally, a dot indicates the estimated position of the smartphone, while crosses mark are the predefined points of interest.
+The smartphone application provides a real-time graphical interface that visualizes the current estimated localization for the visitor on a map. The map also shows the different areas and POIs, which are defined by the museum. The application is designed to be user-friendly and intuitive, allowing visitors to navigate the museum with ease. 
 
-Localization is based on RSSI-based triangulation. A phone is considered to be within a POI when it has been detected at least twice within a three-meter radius. Conversely, the phone is considered to have exited the POI if it is subsequently detected twice at a location beyond five meters. This difference between the entry and exit thresholds is implemented to prevent unstable state changes between being inside and outside a POI. These threshold values have been determined based on preliminary evaluations and may be adjusted for different experimental conditions, depending on beacon placement, artwork density, and the complexity of the indoor environment.
+While the application is mainly thought for the visitor, it can also provide debugging and in-depth real-time analysis of the localization process for the purpose of this study. The debug map displays the static positions of the beacons, circle estimating the distance from the smartphone, a dot indicates the estimated visitor position, and finally crosses mark to show the predefined points of interest. Other graphs displays the raw RSSI, the raw distance and the filtered distance for each beacon in range.
+
+Localization is based on RSSI-based multi-lateration. A phone is considered to be within an area when it has been detected at least twice within. Conversely, the phone is considered to have exited the area if it is subsequently detected twice at a location beyond one meter of the area. This difference between the entry and exit thresholds is implemented to prevent unstable state changes between being inside and outside an area. These threshold values have been determined based on preliminary evaluations and may be adjusted for different experimental conditions, depending on beacon placement, artwork density, and the complexity of the indoor environment.
 
 \section{Experimental Procedure}
 
@@ -71,7 +60,7 @@ The first experiment will take place in a designated corridor within the univers
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{assets/image-floor.jpg}
-    \caption{Photo of the 6th floor of Musée L}
+		\caption{Photo of the 6th floor of Musée L (currently a placeholder)}
     \label{fig:floor-6}
 \end{figure}
 
@@ -80,7 +69,7 @@ Localization data, including timestamps for detected entries, exits, and continu
 \subsection{Experiment 1: Localization Accuracy}
 \label{exp:1_accuracy}
 
-The first experiment focus on the beacons data directly. It aims to calibrate the meta-parameters and analyzes the precision of the distance estimation between the phone and the beacons. The experiment take place in a corridor, with no obstacle and a direct Line of Sight (LoS) between the phone and the sensors. The sensor is placed at 1.5 meters from the ground and measurements are taken at every meter, starting at "0" ($L_0$), with the phone touching the sensor, and up to 15 meters away from it ($L_{15}$). At each step, the phone take measurements for 20 seconds. Each sensor is tested with no other sensor active at the same time to minimize inteferences.
+The first experiment focus on the beacons' data directly. It aims to calibrate the meta-parameters and analyses the precision of the distance estimation between the phone and the beacons. The experiment take place in a corridor, with no obstacle and a direct Line of Sight (LoS) between the phone and the sensors. The sensor is placed at 1.5 meters from the ground and measurements are taken at every meter, starting at "0" ($L_0$), with the phone touching the sensor, and up to 15 meters away from it ($L_{15}$). At each step, the phone take measurements for 20 seconds. Each sensor is tested with no other sensor active at the same time to minimize interferences.
 
 \begin{figure}[H]
     \centering
@@ -121,7 +110,7 @@ The first experiment focus on the beacons data directly. It aims to calibrate th
 \subsection{Experiment 2: Impact of museum layout}
 \label{exp:2_museum}
 
-The second experiment focus on the impact of the museum layout on the results. It takes places directly inside the museum on the floor used for this experimentation. All the devices are on the floor, and the user keep the smartphone in hand, in front of him. The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. Only the data at the different locations are considered, so the path between them has no impact on the results. Points $L_{0,1,2,4,5,8}$ are inside the covered area while $L_{3,6,7}$ are outside of it, in order to analyze the behavior in this edge case. The direct Lines of Sight (LoS) are never guaranteed between the beacons and the phone.
+The second experiment focus on the impact of the museum layout on the results. It takes places directly inside the museum on the floor used for this experimentation. All the devices are on the floor, and the user keep the smartphone in hand, in front of him. The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. Only the data at the different locations are considered, so the path between them has no impact on the results. Points $L_{0,1,2,4,5,8}$ are inside the covered area while $L_{3,6,7}$ are outside of it, in order to analyse the behaviour in this edge case. The direct Lines of Sight (LoS) are never guaranteed between the beacons and the phone.
 
 \begin{figure}[H]
     \centering
@@ -154,12 +143,15 @@ The second experiment focus on the impact of the museum layout on the results. I
     \label{fig:exp2_museum}
 \end{figure}
 
-\subsection{Experiment 3: Detecting POI and providing meaningful data}
+\subsection{Experiment 3: Detecting User Presence in Area and Providing Meaningful Data}
 % Seek for supervisor's opinions
 
-The third experiment focus on the user experience within the exhibition. It has been chosen here to provide to the user two layers of information trough it's visit. First, an overview by section, to provide general information about the sections and their main art pieces, then the application provide the list of the art pieces of the section and close to the visitor, and he has to ability to chose to get more information on them by interacting with the application. This way, the visitor can follow the whole floor without having to interact with the application, but only by moving around areas, but can chose to move by it's own or to get more information on the sections he wants to.
+The third experiment focus on the user experience within the exhibition. It has been chosen here to provide to the user two layers of information through its visit. First, an overview by section, to provide general information about the sections and their main art pieces, then the application provide the list of the art pieces of the section and close to the visitor, and he has the ability to chose to get more information on them by interacting with the application. This way, the visitor can follow the whole floor without having to interact with the application, but only by moving around areas, but can choose to move by its own or to get more information on the sections he wants to.
 
-The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. The user stay still for 20 seconds in each location, then move at a walk pace to the next one. The exact path is shown by dashed lines on the \autoref{fig:exp3_poi}. The exact time the visitor is detected in each area is recorded alongside the classical data.
+The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. The user stay still for 20 seconds in each location, then move at a walk pace to the next one. The exact time the visitor is detected in each area is recorded alongside the classical data.
+
+% TODO
+% The exact path is shown by dashed lines on the \autoref{fig:exp3_poi}.
 
 \begin{figure}[H]
     \centering
@@ -190,10 +182,10 @@ The user follow the path across the 8 locations, following the order $L_0 \right
         % Scale indicator
         \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
     \end{tikzpicture}
-    \caption{Experimental setup for the third experiment showing The beacons and the POI areas.}
+    \caption{Experimental setup for the third experiment showing the beacons and the POI areas.}
     \label{fig:exp3_poi}
 \end{figure}
 
 \subsection{Experiment 4: Repeat with other phones}
 
-The fourth and last experiment aim to ensure the precision of the system with multiple other phones. 
+The fourth and last experiment aim to ensure the precision of the system with multiple other phones. The exact same steps as experiment 3 are repeated, but with different phones.
