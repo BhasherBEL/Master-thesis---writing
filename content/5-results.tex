@@ -53,6 +53,17 @@ After applying a Kalman filter to the data, as presented in \autoref{fig:beacon-
     \label{fig:beacon-dist-filtered-error}
 \end{figure}
 
-%\section{Trilateration precision}
+\section{Multi-lateration precision}
+
+The multi-lateration algorithm was evaluated based on its ability to estimate the position of the smartphone relative to the BLE beacons. The results demonstrate that the system achieves a median localization error of 3 meters, as show by \autoref{fig:trilateration-raw-error}), indicating that, in typical conditions, the estimated position is within three meters of the actual location. Furthermore, the distribution of errors shows that 75\% of the position estimates fall within 4.89 meters, and 90\% are within 5.36 meters. These results highlight the robustness of the multi-lateration approach in the tested environment, even in the presence of signal fluctuations and environmental noise.
+
+It is important to note that in 4.52\% of the measurements, the system was unable to compute a position estimate. This was primarily due to insufficient data, such as a lack of simultaneous beacon signals required for multi-lateration. While this represents a small fraction of the total measurements, it underscores the importance of beacon placement and signal coverage in ensuring continuous localization. Overall, the multi-lateration method provided reliable and reasonably accurate position estimates for the majority of the experiment duration.
+
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{assets/museum-location-precision.pdf}
+		\caption{Multi-lateration error in the museum environment}
+		\label{fig:trilateration-raw-error}
+\end{figure}
 
 %\section{Area detection}

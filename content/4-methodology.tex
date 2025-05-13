@@ -107,85 +107,86 @@ The first experiment focus on the beacons' data directly. It aims to calibrate t
     \label{fig:exp1_setup}
 \end{figure}
 
-\subsection{Experiment 2: Impact of museum layout}
+\subsection{Experiment 2: Impact of Museum Layout and User Experience}
 \label{exp:2_museum}
 
-The second experiment focus on the impact of the museum layout on the results. It takes places directly inside the museum on the floor used for this experimentation. All the devices are on the floor, and the user keep the smartphone in hand, in front of him. The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. Only the data at the different locations are considered, so the path between them has no impact on the results. Points $L_{0,1,2,4,5,8}$ are inside the covered area while $L_{3,6,7}$ are outside of it, in order to analyse the behaviour in this edge case. The direct Lines of Sight (LoS) are never guaranteed between the beacons and the phone.
+The second experiment combines the evaluation of the impact of the museum layout on localization results with the assessment of user experience and the system's ability to detect user presence in specific areas and provide meaningful data.
+
+This experiment takes place directly inside the museum on the floor used for this study. All ESP32 devices are installed close to the floor, and the user keeps the smartphone in hand, in front of him. The user follows a predefined path across several locations ($L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_7$), pausing for 20 seconds at each location before moving at a walking pace to the next.
+
+During the experiment, the application provides two layers of information to the user: an overview by section (with general information about the sections and their main art pieces), and a list of art pieces in the current section and those close to the visitor. The visitor can choose to get more information on specific pieces by interacting with the application, or simply follow the suggested path without interaction. The exact time the visitor is detected in each area is recorded alongside the classical localization data, allowing for the evaluation of both technical performance and user engagement.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=0.4]
         % Room dimensions 
         \draw[thick] (0,0) rectangle (35.417, 9.812);  
+
+        % Sections
+        \draw[fill=red!20] (13.25, 5.312) rectangle (22.96, 9.312);
+        \draw[fill=red!20] (29.85, 0.5) rectangle (34.917, 9.312);
+        \draw[fill=red!20] (23.5, 0.5) rectangle (29.4, 9.312);
+        \draw[fill=red!20] (13.25, 0.5) rectangle (22.96, 4.812);
+        \draw[fill=red!20] (0.5, 4.312) rectangle (12.75, 9.312);
+
         % Grid (optional, for reference)
         \draw[gray!30, step=1] (0,0) grid (35.417, 9.812);
-        
+
         % ESP32 devices (blue dots)
         \filldraw[blue] (26.681, 0.252) circle (0.2) node[below] {ESP-1};
         \filldraw[blue] (25.608, 9.221) circle (0.2) node[below] {ESP-2};
         \filldraw[blue] (11.209, 9.197) circle (0.2) node[below] {ESP-3};
         \filldraw[blue] (0, 0) circle (0.2) node[below] {ESP-4};
+        \filldraw[blue] (35.417, 7.612) circle (0.2) node[below] {ESP-5};
+        \filldraw[blue] (2.7, 9.812) circle (0.2) node[below] {ESP-6};
 
-        % User positions (X marks)
-        \filldraw (18.201, 3.037) circle (0.1) node[above] {$L_0$, $L_8$};
-        \filldraw (10.962, 0.531) circle (0.1) node[above] {$L_1$};
-        \filldraw (5.590, 0.777) circle (0.1) node[above] {$L_2$};
-        \filldraw (3.642, 6.864) circle (0.1) node[above] {$L_3$};
-        \filldraw (9.175, 5.949) circle (0.1) node[above] {$L_4$};
-        \filldraw (23.852, 5.923) circle (0.1) node[above] {$L_5$};
-        \filldraw (28.635, 5.005) circle (0.1) node[above] {$L_6$};
-        \filldraw (33.240, 3.287) circle (0.1) node[above] {$L_7$};
-        
+        % User positions
+        \filldraw (19, 7.3) circle (0.1) node[below] {$L_{0,7}$};
+        \filldraw (32.38, 4.91) circle (0.1) node[below] {$L_1$};
+        \filldraw (27.93, 4.91) circle (0.1) node[below] {$L_2$};
+        \filldraw (24.98, 4.91) circle (0.1) node[below] {$L_3$};
+        \filldraw (19.11, 2.16) circle (0.1) node[below] {$L_4$};
+        \filldraw (10.5, 5) circle (0.1) node[below] {$L_5$};
+        \filldraw (3.5, 5.5) circle (0.1) node[below] {$L_6$};
+
+        % Dashed lines from L0 to L1 (first X, then Y)
+        \draw[dashed, thick] (19, 7.3) -- (32.38, 7.3);
+        \draw[dashed, thick] (32.38, 7.3) -- (32.38, 4.91);
+
+        % Dashed lines from L1 to L2 (first Y to 1.5, then X, then Y)
+        \draw[dashed, thick] (32.38, 4.91) -- (32.38, 1.5);
+        \draw[dashed, thick] (32.38, 1.5) -- (27.93, 1.5);
+        \draw[dashed, thick] (27.93, 1.5) -- (27.93, 4.91);
+
+        % Dashed lines from L2 to L3 (first Y to 1.5, then X, then Y)
+        \draw[dashed, thick] (27.93, 4.91) -- (27.93, 1.5);
+        \draw[dashed, thick] (27.93, 1.5) -- (24.98, 1.5);
+        \draw[dashed, thick] (24.98, 1.5) -- (24.98, 4.91);
+
+        % Dashed lines from L3 to L4 (first Y, then X)
+        \draw[dashed, thick] (24.98, 4.91) -- (24.98, 2.16);
+        \draw[dashed, thick] (24.98, 2.16) -- (19.11, 2.16);
+
+        % Dashed lines from L4 to L5 (first X, then Y)
+        \draw[dashed, thick] (19.11, 2.16) -- (10.5, 2.16);
+        \draw[dashed, thick] (10.5, 2.16) -- (10.5, 5);
+
+        % Dashed lines from L5 to L6 (first Y=7, then X, then Y)
+        \draw[dashed, thick] (10.5, 5) -- (10.5, 7);
+        \draw[dashed, thick] (10.5, 7.3) -- (3.5, 7.3);
+        \draw[dashed, thick] (3.5, 7) -- (3.5, 5.5);
+
+        % Dashed lines from L6 to L0 (first Y, then X)
+        \draw[dashed, thick] (3.5, 5.5) -- (3.5, 7.3);
+        \draw[dashed, thick] (3.5, 7.3) -- (19, 7.3);
+
         % Scale indicator
         \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
     \end{tikzpicture}
-    \caption{Experimental setup for the second experiment showing the beacons and some reference points.}
+    \caption{Experimental setup for the second experiment showing the beacons, reference points, and POI areas.}
     \label{fig:exp2_museum}
 \end{figure}
 
-\subsection{Experiment 3: Detecting User Presence in Area and Providing Meaningful Data}
-% Seek for supervisor's opinions
+\subsection{Experiment 3: Repeat with other phones}
 
-The third experiment focus on the user experience within the exhibition. It has been chosen here to provide to the user two layers of information through its visit. First, an overview by section, to provide general information about the sections and their main art pieces, then the application provide the list of the art pieces of the section and close to the visitor, and he has the ability to chose to get more information on them by interacting with the application. This way, the visitor can follow the whole floor without having to interact with the application, but only by moving around areas, but can choose to move by its own or to get more information on the sections he wants to.
-
-The user follow the path across the 8 locations, following the order $L_0 \rightarrow L_1 \rightarrow~...~\rightarrow L_8$. The user stay still for 20 seconds in each location, then move at a walk pace to the next one. The exact time the visitor is detected in each area is recorded alongside the classical data.
-
-% TODO
-% The exact path is shown by dashed lines on the \autoref{fig:exp3_poi}.
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[scale=0.4]
-        % Room dimensions 
-        \draw[thick] (0,0) rectangle (35.417, 9.812);  
-        
-        % Sections
-        \draw[fill=red!20] (29.25, 0.5) rectangle (34.917, 9.312);
-        \draw[fill=red!20] (24.25, 0.5) rectangle (28.75, 9.312);
-        \draw[fill=red!20] (13.25, 6.312) rectangle (21.75, 9.312);
-        \draw[fill=red!20] (13.25, 0.5) rectangle (21.75, 3.812);
-        \draw[fill=red!20] (6.25, 0.5) rectangle (10.75, 9.312);
-        \draw[fill=red!20] (0.5, 4.812) rectangle (5.75, 9.312);
-        
-        % Grid (optional, for reference)
-        \draw[gray!30, step=1] (0,0) grid (35.417, 9.812);
-        
-        % ESP32 devices (blue dots)
-        \filldraw[blue] (26.681, 0.252) circle (0.2) node[below] {ESP-1};
-        \filldraw[blue] (25.608, 9.221) circle (0.2) node[below] {ESP-2};
-        \filldraw[blue] (11.209, 9.197) circle (0.2) node[below] {ESP-3};
-        \filldraw[blue] (0, 0) circle (0.2) node[below] {ESP-4};
-
-        % User positions
-        \filldraw (23, 9) circle (0.1) node[below] {$L_0$};
-        
-        % Scale indicator
-        \draw[|-|] (-0.5,0) -- (-0.5,1) node[midway, left] {1m};
-    \end{tikzpicture}
-    \caption{Experimental setup for the third experiment showing the beacons and the POI areas.}
-    \label{fig:exp3_poi}
-\end{figure}
-
-\subsection{Experiment 4: Repeat with other phones}
-
-The fourth and last experiment aim to ensure the precision of the system with multiple other phones. The exact same steps as experiment 3 are repeated, but with different phones.
+The third and last experiment aim to ensure the precision of the system with multiple other phones. The exact same steps as experiment 2 are repeated, but with different phones.
