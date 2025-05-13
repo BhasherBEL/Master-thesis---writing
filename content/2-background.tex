@@ -175,6 +175,14 @@ Given these constraints, multi-lateration emerges as the most viable solution. A
 
 \section{Application in museums}
 
-Bluetooth Low Energy (BLE) has been studied in the context of museum layouts, though the body of research remains relatively limited. For instance, \cite{barsocchi_detecting_2021} utilizes BLE beacons as proximity sensors, while \cite{verde_indoor_2023} focuses on determining a visitor's location within a specific room rather than identifying individual art pieces, enabling the delivery of relevant content in a broader context. 
+Only a few applications of Bluetooth Low Energy (BLE) in museums have been studied. For instance, \cite{barsocchi_detecting_2021} utilizes BLE beacons as proximity sensors, while \cite{verde_indoor_2023} focuses on determining a visitor's location within a specific room rather than identifying individual art pieces, enabling the delivery of relevant content in a broader context. 
 
 In the realm of indoor localization, \cite{spachos_ble_2020} employed Kalman filtering to enhance distance estimation, achieving an error of less than 3.5 meters for 95\% of readings with raw data, and 3 meters with filtered data. This indicates that filtering uncertainties in raw data can significantly reduce average errors. The study found that when the receiver is within 50 centimeters of a beacon, the accuracy of the system is notably high, suggesting that positioning beacons close to Points of Interest (POIs) can enhance overall performance. Conversely, it is also noted that if beacons are spaced less than one meter apart, the accuracy may decrease.
+
+\section{Summary}
+
+This chapter has provided an overview of the main technologies and methods for indoor localization, with a particular focus on their applicability in museum environments. We compared the strengths and limitations of various approaches, including satellite navigation, QR codes, RFID, NFC, vision, infrared, ultrasound, ultra-wide band, Wi-Fi, Bluetooth, and hybrid systems. We also discussed key localization algorithms such as multi-lateration, RSSI-APIT, machine learning-based methods, fingerprinting, and range-free techniques. 
+
+While no single technology or method is perfect, Bluetooth Low Energy (BLE) combined with multi-lateration offers a practical balance between accuracy, cost, and ease of deployment for museums. The review of related work highlights that, although BLE has been applied in some museum contexts, the field remains relatively underexplored, leaving room for further research and innovation. This background sets the stage for the following chapters, which will detail the design, implementation, and evaluation of a BLE-based indoor localization system tailored to the needs of museums.
+
+

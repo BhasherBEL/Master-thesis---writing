@@ -1,6 +1,8 @@
 \chapter{Implementation}
 \label{chap:implementation}
 
+This chapter details the practical realization of the indoor localization system described in the previous sections. It covers the overall system architecture, the design and configuration of the ESP32 BLE beacons, the development of the smartphone application, and the integration of the MQTT broker for communication. Each component is discussed in terms of its role, implementation choices, and how they collectively contribute to a robust and scalable solution for museum environments.
+
 \section{System Architecture}
 The full system is composed of three different components, each playing a crucial role in its functionality. First, ESP32 devices are used as BLE beacons to broadcast their position. These devices operate by periodically transmitting Bluetooth Low Energy (BLE) signals, ensuring reliable communication with nearby devices. When network access is available, they upload their position data to an MQTT broker, enabling real-time updates across the system.
 
