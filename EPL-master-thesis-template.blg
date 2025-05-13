@@ -4,47 +4,44 @@ The top-level auxiliary file: EPL-master-thesis-template.aux
 The style file: plain.bst
 Database file #1: bibliography.bib
 Database file #2: references.bib
-Warning--I didn't find a database entry for "barsocchi_detecting_2021"
-Warning--I didn't find a database entry for "verde_indoor_2023"
-You've used 20 entries,
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            629 strings with 8731 characters,
-and the built_in function-call counts, 6889 in all, are:
-= -- 681
-> -- 339
+            635 strings with 9036 characters,
+and the built_in function-call counts, 7572 in all, are:
+= -- 743
+> -- 380
 < -- 1
-+ -- 138
-- -- 114
-* -- 538
-:= -- 1169
-add.period$ -- 73
-call.type$ -- 20
-change.case$ -- 117
++ -- 154
+- -- 128
+* -- 600
+:= -- 1289
+add.period$ -- 79
+call.type$ -- 22
+change.case$ -- 130
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 215
-empty$ -- 520
-format.name$ -- 114
-if$ -- 1398
+cite$ -- 22
+duplicate$ -- 237
+empty$ -- 568
+format.name$ -- 128
+if$ -- 1533
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 16
-newline$ -- 116
-num.names$ -- 40
-pop$ -- 99
+int.to.str$ -- 22
+missing$ -- 18
+newline$ -- 126
+num.names$ -- 44
+pop$ -- 108
 preamble$ -- 1
-purify$ -- 97
+purify$ -- 108
 quote$ -- 0
-skip$ -- 150
+skip$ -- 164
 stack$ -- 0
-substring$ -- 451
-swap$ -- 30
+substring$ -- 485
+swap$ -- 32
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 88
 warning$ -- 0
-while$ -- 66
-width$ -- 22
-write$ -- 243
-(There were 2 warnings)
+while$ -- 72
+width$ -- 24
+write$ -- 265

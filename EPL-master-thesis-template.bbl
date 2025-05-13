@@ -14,6 +14,12 @@ Stefano Alletto, Rita Cucchiara, Giuseppe Del~Fiore, Luca Mainetti, Vincenzo
   {Museum}.
 \newblock {\em IEEE Internet of Things Journal}, 3(2):244--253, April 2016.
 
+\bibitem{barsocchi_detecting_2021}
+Paolo Barsocchi, Michele Girolami, and Davide La~Rosa.
+\newblock Detecting {Proximity} with {Bluetooth} {Low} {Energy} {Beacons} for
+  {Cultural} {Heritage}.
+\newblock {\em Sensors}, 21(21):7089, October 2021.
+
 \bibitem{gai_epl}
 bureau de faculté de l'École Polytechnique~de Louvain.
 \newblock Règlement des travaux de fin d’études à l’ecole polytechnique
@@ -139,5 +145,11 @@ Jean-François van Drooghenbroeck.
   l’attention des étudiantes et étudiants de l’uclouvain.
 \newblock \url{https://www.uclouvain.be/consignes-chatgpt}, 2024.
 \newblock Accessed: 2025-04-27.
+
+\bibitem{verde_indoor_2023}
+David Verde, Luís Romero, Pedro~Miguel Faria, and Sara Paiva.
+\newblock Indoor {Content} {Delivery} {Solution} for a {Museum} {Based} on
+  {BLE} {Beacons}.
+\newblock {\em Sensors}, 23(17):7403, August 2023.
 
 \end{thebibliography}
