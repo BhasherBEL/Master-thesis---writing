@@ -35,16 +35,16 @@ These findings confirm that the theoretical value of $tx_{power} = -69$ is robus
 \section{Distance to Beacons}
 Experimental data from Experiment 1, as shown in \autoref{fig:beacon-dist-raw-error}, confirm the findings reported by \cite{spachos_ble_2020}, which highlight a correlation between ranging precision and beacon distance. Specifically, beacons located within a few meters provide highly accurate distance estimates with minimal error spread.
 
-Analysis of the raw distance errors shows that the median error typically lies between 2 and 3 meters. Moreover, 75\% of distance errors are below 5 meters, and 90\% fall below 8 meters.
-
-After applying a Kalman filter to the data, as presented in \autoref{fig:beacon-dist-filtered-error}, error margins are significantly reduced. The median error decreases to between 1.5 and 2.5 meters, with 75\% of errors below 4 meters. However, the 90\% threshold remains around 8 meters, indicating that although the filter reduces overall noise, extreme conditions still lead to larger errors.
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{assets/beacon-dist-raw-error-by-beacon.pdf}
     \caption{Raw distance error variation relative to distance from beacons}
     \label{fig:beacon-dist-raw-error}
 \end{figure}
+
+Analysis of the raw distance errors shows that the median error typically lies between 2 and 3 meters. Moreover, 75\% of distance errors are below 5 meters, and 90\% fall below 8 meters.
+
+After applying a Kalman filter to the data, as presented in \autoref{fig:beacon-dist-filtered-error}, error margins are significantly reduced. The median error decreases to between 1.5 and 2.5 meters, with 75\% of errors below 4 meters. However, the 90\% threshold remains around 8 meters, indicating that although the filter reduces overall noise, extreme conditions still lead to larger errors.
 
 \begin{figure}[h]
     \centering
@@ -55,15 +55,36 @@ After applying a Kalman filter to the data, as presented in \autoref{fig:beacon-
 
 \section{Multi-lateration precision}
 
-The multi-lateration algorithm was evaluated based on its ability to estimate the position of the smartphone relative to the BLE beacons. The results demonstrate that the system achieves a median localization error of 3 meters, as show by \autoref{fig:trilateration-raw-error}), indicating that, in typical conditions, the estimated position is within three meters of the actual location. Furthermore, the distribution of errors shows that 75\% of the position estimates fall within 4.89 meters, and 90\% are within 5.36 meters. These results highlight the robustness of the multi-lateration approach in the tested environment, even in the presence of signal fluctuations and environmental noise.
+The multi-lateration algorithm was evaluated based on its ability to estimate the position of the smartphone relative to the BLE beacons. The results demonstrate that the system achieves a median localization error of 2.8 meters, as show by \autoref{fig:trilateration-raw-error}), indicating that, in typical conditions, the estimated position is within 2.8 meters of the actual location. Furthermore, the distribution of errors shows that 75\% of the position estimates fall within 3.86 meters, and 90\% are within 5.81 meters. These results highlight the robustness of the multi-lateration approach in the tested environment, even in the presence of signal fluctuations and environmental noise.
 
-It is important to note that in 4.52\% of the measurements, the system was unable to compute a position estimate. This was primarily due to insufficient data, such as a lack of simultaneous beacon signals required for multi-lateration. While this represents a small fraction of the total measurements, it underscores the importance of beacon placement and signal coverage in ensuring continuous localization. Overall, the multi-lateration method provided reliable and reasonably accurate position estimates for the majority of the experiment duration.
-
-\begin{figure}[h]
+\begin{figure}[H]
 		\centering
 		\includegraphics[width=\linewidth]{assets/museum-location-precision.pdf}
 		\caption{Multi-lateration error in the museum environment}
 		\label{fig:trilateration-raw-error}
 \end{figure}
 
-%\section{Area detection}
+
+It is important to note that in 9\% of the measurements, the system was unable to compute a position estimate. This was primarily due to insufficient data, such as a lack of simultaneous beacon signals required for multi-lateration. While this represents a small fraction of the total measurements, it underscores the importance of beacon placement and signal coverage in ensuring continuous localization. Overall, the multi-lateration method provided reliable and reasonably accurate position estimates for the majority of the experiment duration.
+
+
+\section{Area detection}
+
+As shown in \autoref{fig:area-precision}, the correct area is detected in more than 80\% of cases. However, the detection accuracy varies significantly depending on the specific area. Side areas (steps 1, 2, 3, 5, and 6) achieve near-perfect detection rates, ranging from 93\% to 100\%. In contrast, central areas (steps 0 and 4) are correctly identified in only 27\% and 57\% of the cases, respectively.
+
+\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{assets/museum-area-precision.pdf}
+		\caption{Area detection in the museum environment}
+		\label{fig:area-precision}
+\end{figure}
+
+    Several factors, including the museum's layout and the placement of beacons, may explain these discrepancies. While most of the museum floor is an open space, the central areas are divided by large stairwell walls, which can obstruct signal transmission. Moreover, as illustrated in \autoref{fig:area-precision}, the placement of the beacons is not ideal for these central zones. 
+
+    Beacon locations are marked by green dots, with their transparency indicating the frequency of signal detection. Green triangles denote groups of three beacons used in multilateration, which are selected only if all three beacons were detected simultaneously at least 50\% of the time. In the worst-performing case (step 0), the relevant beacons are heavily off-centered from the target area, likely contributing to the low accuracy. At step 4, although up to five beacons are detected, only four are stable enough to be consistently utilized, and they typically form large, asymmetrical triangles. In contrast, better-performing steps benefit from small, well-balanced beacon triangles, which likely facilitate more accurate localization. 
+     
+%\section{User Experience}
+
+\section{Summary}
+
+This chapter presented a comprehensive evaluation of the BLE-based indoor localization system. Calibration experiments confirmed that the theoretical transmission power parameter ($tx_{power}$) is robust across environments, while the environmental factor ($N$) requires context-specific adjustment but can be applied uniformly to all beacons within a given space. Distance estimation experiments demonstrated that, after filtering, median errors in near-perfect environment can be reduced to 1.5--2.5 meters, though occasional outliers persist due to environmental noise. Multi-lateration yielded a median localization error of 2.8 meters, with the majority of position estimates falling below 4 meters of the true location, highlighting the method's reliability under typical conditions. Area detection accuracy exceeded 80\% overall, with side areas achieving near-perfect results, while central areas were more challenging due to suboptimal beacon placement and architectural obstructions. These findings underscore the importance of careful calibration and beacon deployment in achieving robust and accurate indoor localization.
