@@ -15,7 +15,7 @@ Protecting visitor privacy in public cultural spaces such as museums is essentia
 
 Traditional indoor localization systems often rely on centralized servers for data processing, which may result in sensitive location data being stored or transferred externally. This introduces legal and ethical risks, particularly when data can potentially be linked to identifiable individuals or behavioral patterns. However, recent developments in privacy-focused computing demonstrate that it is feasible to maintain localization functionality without compromising user privacy \cite{alletto_indoor_2016, spachos_ble_2020}.
 
-In this study, privacy protection is achieved through a local-only processing model. All position computations are performed directly on the visitor’s smartphone. No user-identifiable data or location history is transmitted to external systems without the express user consent. The server only provides static configuration data (such as beacon identifiers and positions), ensuring that all tracking and decision-making remains strictly client-side. This design minimizes the risk of privacy breaches and aligns with best practices for responsible personal data processing \cite{cnil-recomendation-mobile}.
+In this study, privacy protection is achieved through a local-only processing model. All position computations are performed directly on the visitor’s smartphone. No user data or location history is transmitted to external systems. The server only provides static configuration data (such as beacon identifiers and positions), ensuring that all tracking and decision-making remains strictly client-side. The server data are generic, and the same for all the clients, preventing the need to identify the user. This design minimizes the risk of privacy breaches and aligns with best practices for responsible personal data processing \cite{cnil-recomendation-mobile}.
 
 \subsection{Sustainability and Energy Efficiency}
 
@@ -37,7 +37,7 @@ For example, in \cite{alletto_indoor_2016}, personalization is introduced throug
 
 \subsection{Hardware and System Architecture}
 
-The experimental setup comprises up to four ESP32 devices running a custom firmware that enables them to operate as BLE beacons. A picture of an ESP32 is provided at \autoref{fig:esp32}. These devices periodically broadcast BLE signals. When network access is available, they upload their position to an MQTT broker; otherwise, they function solely as standalone BLE beacons.
+The experimental setup comprises up to six ESP32 devices running a custom firmware that enables them to operate as BLE beacons. A picture of an ESP32 is provided at \autoref{fig:esp32}. These devices periodically broadcast BLE signals. When network access is available, they upload their position to an MQTT broker; otherwise, they function solely as standalone BLE beacons, as they don't require Wi-Fi connection to operate.
 
 A smartphone application is responsible for collecting and processing the beacon signals. This application retrieves a list of authorized BLE beacon signatures from the MQTT broker and continuously scans for nearby devices that match these known signatures. No user data is transmitted from the smartphone to the server, ensuring privacy for both the user and other individuals within the area.
 
@@ -51,11 +51,11 @@ Localization is based on RSSI-based multi-lateration. A phone is considered to b
 
 \section{Experimental Procedure}
 
-To systematically evaluate the performance of the system, and it's value within a museum, four distinct experiments will be conducted. These experiments focus on evaluating localization accuracy, differences in smartphone models, impact of museum layouts and its operations within a museum.
+To systematically evaluate the performance of the system, and it's value within a museum, four distinct experiments will be conducted. These experiments focus on evaluating localization accuracy, differences in smartphone models and impact of museum layouts.
 
 \subsection{Experimental layout}
 
-The first experiment will take place in a designated corridor within the university, while the others are directly on a floor of the museum. A picture of that floor is provided in \autoref{fig:floor-6}. ESP32 beacons will  be installed at predefined locations to provide adequate coverage of all POIs. The POIs correspond to specific reference points where localization should occur accurately. Participants performing the tests will execute a predefined sequence of movements, ensuring uniformity in data collection and minimizing variability caused by human movement patterns.
+The first experiment will take place in a designated corridor within the university, while the others are directly conducted on a floor of the museum. A picture of that floor is provided in \autoref{fig:floor-6}. ESP32 beacons will be installed at predefined locations, chosen as the best trade-off between adequate coverage of all the reference points and power socket availability within the experimental area. Participants performing the tests will execute a predefined sequence of movements, ensuring uniformity in data collection and minimizing variability caused by human movement patterns.
 
 \begin{figure}
     \centering

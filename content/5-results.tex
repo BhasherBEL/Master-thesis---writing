@@ -1,13 +1,15 @@
 \chapter{Experimental Results}
 \label{chap:results}
 
+This chapter presents the experimental evaluation of the proposed BLE-based indoor localization system. Through a series of controlled experiments conducted in both corridor and museum environments, we have assessed the accuracy and robustness of distance estimation, multi-lateration, and area detection methods. The results provide insights into the calibration process, the impact of environmental factors, and the overall performance of the system under real-world conditions.
+
 \section{Calibration}
 The distance estimation from the Received Signal Strength Indicator (RSSI) is computed using \autoref{eq:BLE_RSSI}, which includes two meta-parameters. The first parameter, $tx_{power}$, represents the RSSI at a distance of one meter. The second parameter, the environmental factor ($N$), accounts for signal propagation characteristics that depend on the surroundings.
 
 \subsection{RSSI at One Meter ($tx_{power}$)}
 Results from the first experiment in \autoref{exp:1_accuracy} are displayed in \autoref{fig:beacon-rssi-1m}. These results indicate that although the RSSI distribution shows some variability, it remains centered around the mean. The optimal $tx_{power}$ values can be obtained by averaging the RSSI values for each beacon.
 
-Empirical results are consistent with the expected theoretical value of $-69$. The first two beacons yield values very close to this reference, while the third beacon reports a slightly higher RSSI of $-63$. The broader distribution for this beacon may suggest environmental influences affecting signal strength.
+Empirical results from the 2500 measures are consistent with the expected theoretical value of $-69$. The first two beacons yield values very close to this reference, while the third beacon reports a slightly higher RSSI of $-63$. The broader distribution for this beacon may suggest environmental influences affecting signal strength.
 
 \begin{figure}[h]
     \centering

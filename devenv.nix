@@ -6,6 +6,7 @@
   packages = with pkgs; [
     reflex
     gnumake
+    inkscape
   ];
 
   languages.texlive = {
@@ -16,6 +17,9 @@
       "tabto-ltx"
       "anyfontsize"
       "subfiles"
+      "svg"
+      "transparent"
+      "catchfile"
     ];
   };
 }

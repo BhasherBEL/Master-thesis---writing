@@ -1,12 +1,12 @@
 all:
-	pdflatex EPL-master-thesis-template.tex
+	pdflatex -shell-escape EPL-master-thesis-template.tex
 	bibtex EPL-master-thesis-template
-	pdflatex EPL-master-thesis-template.tex
-	latex -output-format=pdf EPL-master-thesis-template.tex
+	pdflatex -shell-escape EPL-master-thesis-template.tex
+	latex -output-format=pdf -shell-escape EPL-master-thesis-template.tex
 	mv EPL-master-thesis-template.pdf Master-Thesis-Brieuc-Dubois-2025.pdf
 
 fast:
-	latex -output-format=pdf EPL-master-thesis-template.tex
+	latex -output-format=pdf -shell-escape EPL-master-thesis-template.tex
 	mv EPL-master-thesis-template.pdf Master-Thesis-Brieuc-Dubois-2025.pdf
 
 watch:

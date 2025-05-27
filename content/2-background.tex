@@ -56,7 +56,7 @@ The accuracy of BLE localization depends on beacon density and placement. While 
 
 Bluetooth does not interfere with wireless technologies like Wi-Fi, GPS, or FM signals. However, it may suffer from interference with other Bluetooth devices \cite{spachos_ble_2020}, which could be particularly problematic in environments like digital museums where visitors may be using Bluetooth for audio guides. In optimal conditions, the theoretical Received Signal Strength Indicator (RSSI) for BLE follows the equation \ref{eq:BLE_RSSI}, where the received signal strength depends logarithmically on distance. This relationship explains why accuracy decreases as the distance between the beacon and receiver increases \cite{spachos_ble_2020}. 
 
-As outlined by \cite{barsocchi_detecting_2021}, BLE uses 5 different channels, and the channel has an impact on the received RSSI. Enforce the beacons to use only one channel can improve the precision.  
+As outlined by \cite{barsocchi_detecting_2021}, BLE uses 5 different channels, and the channel has an impact on the received RSSI. Enforcing the beacons to use only one channel can improve the precision.  
 
 \begin{equation} \label{eq:BLE_RSSI}
     RSSI = A - 10n \cdot \log_{10}d
@@ -72,7 +72,7 @@ The \autoref{tab:comparison} summarizes the various technologies discussed in th
 
 While no single technology meets all these requirements, some stand out more than others. Satellite navigation fulfils most requirements, explaining its widespread use; however, it suffers from poor accuracy indoors and is primarily designed for outdoor positioning. QR codes, RFID, and NFC are also widely available, but they necessitate user involvement and a high density of tags. Infrared, ultrasound, and ultra-wideband technologies perform well but require specialized devices and beacons, leading to higher costs. Vision-based systems are intriguing but demand substantial infrastructure to capture and analyse data in real time, which also raises privacy concerns.  
 
-Finally, both Wi-Fi and Bluetooth are widely accessible and do not require active user participation, but their accuracy typically ranges from 3 to 5 meters. This level of precision may suffice in a museum context when accompanied by adequate post-processing to enhance accuracy. Ultimately, Bluetooth was selected due to the low cost of its beacons, power efficiency, and the fact that BLE bands are less congested than Wi-Fi's. 
+Finally, both Wi-Fi and Bluetooth are widely accessible and do not require active user participation, but their accuracy typically ranges from 3 to 5 meters. This level of precision may suffice in a museum context when accompanied by adequate post-processing to enhance accuracy. Ultimately, Bluetooth was selected due to the low cost of its beacons, and it's power efficiency.
 
 \begin{table}[h]
     \resizebox{\textwidth}{!}{
@@ -147,7 +147,7 @@ To assess the accuracy of this method, considering RSSI-induced errors, the Mean
 
 \subsection{RSSI-APIT Algorithm}
 
-Research has shown that the RSSI-APIT localization algorithm achieves an average accuracy of 1.55 meters, reducing localization error by 57\% \cite{shen_indoor_2023}. However, it relies on the APIT framework, which requires numerous anchor points for effective functioning. In Shen et al. \cite{shen_indoor_2023}, 20 anchors were used to achieve these results. They found that at least 15 anchors are needed to maintain an error below 5 meters, and 20 anchors are required to reduce it to approximately 2 meters. Beyond 25 anchors, further improvements become negligible.   
+Research has shown that the RSSI-APIT localization algorithm achieves an average accuracy of 1.55 meters, reducing localization error by 57\% compared to tri-lateration \cite{shen_indoor_2023}. However, it relies on the APIT framework, which requires numerous anchor points for effective functioning. In Shen et al. \cite{shen_indoor_2023}, 20 anchors were used to achieve these results. They found that at least 15 anchors are needed to maintain an error below 5 meters, and 20 anchors are required to reduce it to approximately 2 meters. Beyond 25 anchors, further improvements become negligible.   
 
 Additionally, this algorithm requires training an artificial neural network, which presents challenges such as high data and energy consumption, as well as the need for retraining in different environments. As a result, the added accuracy does not justify the high setup, operational, and maintenance costs. 
 
